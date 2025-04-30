@@ -1,5 +1,9 @@
+def log_message(level, message):
+    #placeholder for our logging system
+    print(f"[{level.upper()}] {message}")
+
 class Character:
-    def __init__(self, name, race, background, alignment, base_attributes):
+    def __init__(self, name, race, background, alignment, base_attributes, feats=None):
         """
         Initializes a new character.
 
@@ -16,9 +20,10 @@ class Character:
         self.alignment = alignment
         self.base_attributes = base_attributes
         self.level_bonuses = {attr: 0 for attr in base_attributes} # Bonuses from level-based ASIs
-        self.equipment_bonuses = {attr: 0 for attr in base_attributes}
-        self.boon_bonuses = {attr: 0 for attr in base_attributes}
-        self.curse_penalties = {attr: 0 for attr in base_attributes}
+        self.equipment_bonuses = {attr: [] for attr in base_attributes}
+        self.boon_bonuses = {attr: [] for attr in base_attributes}
+        self.curse_penalties = {attr: [] for attr in base_attributes}
+        self.attribute_overrides = {} # {attribute: override_value} This is for hard overrides like INT = 19.
         self.hit_points = {"current": 0, "maximum": 0, "temporary": 0}
         self.armor_class = 0
         self.initiative_bonus = 0
@@ -26,6 +31,7 @@ class Character:
         self.classes = {} # Dictionary to store class levels: {"Fighter": 3, "Wizard" : 2}
         self.level_history = [] # List of (class_name, level_gained) tuples
         self.proficiency_bonus = 2 # Base proficiency bonus starts at +2
+        self.feats = feats if feats is not None else []
         
     def get_attribute_score(self, attribute):
         """
@@ -33,10 +39,11 @@ class Character:
         """
         base = self.base_attributes.get(attribute, 0)
         level_bonus = self.level_bonuses.get(attribute, 0)
-        equipment_bonus = self.equipment_bonuses.get(attribute, 0)
-        boon_bonus = self.boon_bonuses.get(attribute, 0)
-        curse_penalty = self.curse_penalties.get(attribute, 0)        
-        return base + level_bonus + equipment_bonus + boon_bonus - curse_penalty
+        equipment_bonus = sum(bonus for _, bonus in self.equipment_bonuses.get(attribute, []))
+        boon_bonus = sum(bonus for _, bonus in self.boon_bonuses.get(attribute, []))
+        curse_penalty = sum(penalty for _, penalty in self.curse_penalties.get(attribute, []))   
+        override = self.attribute_overrides.get(attribute)
+        return override if override is not None else base + level_bonus + equipment_bonus + boon_bonus - curse_penalty
         
     def get_attribute_modifier(self, attribute):
         """
@@ -64,7 +71,7 @@ class Character:
                 self.classes[class_name] = 0 # Ensure level doesn't go below 0
             
             #TODO implement log ic to handle level history and potentially revert stats based on the 'revert_stats' flag and the level history. This will be more complex.
-            print(f"{self.name}'s level in {class_name} reduced to {self.classes[class_name]}.")
+            log_message("INFO", f"{self.name}'s level in {class_name} reduced to {self.classes[class_name]}.")
             self._update_proficiency_bonus() # Recalculate proficiency bonus on level down
     
     def _update_proficiency_bonus(self):
@@ -83,19 +90,45 @@ class Character:
         else:
             self.proficiency_bonus = 6
     
-    def apply_equipment_bonus(self, attribute, bonus):
+    def apply_equipment_bonus(self, attribute, source, bonus):
         """
         Applies a bonus to an attribute from equipment.
         """
-        self.equipment_bonuses[attribute] = self.equipment_bonuses.get(attribute, 0) + bonus
+        self.equipment_bonuses[attribute].append((source, bonus))
     
-    def remove_equipment_bonus(self, attribute, bonus):
+    def remove_equipment_bonus(self, attribute, source, bonus):
         """
         Removes a bonus to an attribute from equipment.
         """
-        self.equipment_bonuses[attribute] = max(0, self.equipment_bonuses.get(attribute, 0) - bonus)
+        self.equipment_bonuses[attribute] = [(s, b) for s, b in self.equipment_bonuses[attribute] if s != source or b != bonus]
+
     
     #TODO add simlar methods for boon bonuses and curse penalties
+    def apply_boon_bonus(self, attribute, source, bonus):
+        self.boon_bonuses[attribute].append((source, bonus))
+
+    def remove_boon_bonus(self, attribute, source, bonus):
+        self.boon_bonuses[attribute] = [(s, b) for s, b in self.boon_bonuses[attribute] if s != source or b != bonus]
+
+    def apply_curse_penalty(self, attribute, source, penalty):
+        self.curse_penalties[attribute].append((source, penalty))
+
+    def remove_curse_penalty(self, attribute, source, penalty):
+        self.curse_penalties[attribute] = [(s, p) for s, p in self.curse_penalties[attribute] if s != source or p != penalty]
+
+    def set_attribute_override(self, attribute, value):
+        self.attribute_overrides[attribute] = value
+
+    def clear_attribute_override(self, attribute):
+        if attribute in self.attribute_overrides:
+            del self.attribute_overrides[attribute]
+    
+    def add_feat(self, feat_name): #! need to flag back if feat exists on character on add attempt
+        if feat_name not in self.feats:
+            self.feats.append(feat_name)
+    
+    def has_feat(self, feat_name):
+        return feat_name in self.feats
     
 #example instantiation:
 if __name__ == "__main__":
@@ -105,23 +138,21 @@ if __name__ == "__main__":
         background="Noble",
         alignment="Chaotic Good",
         base_attributes={
-            "STR": 14,
-            "DEX": 13,
-            "CON": 15,
-            "INT": 10,
-            "WIS": 12,
+            "STR": 14, 
+            "DEX": 13, 
+            "CON": 15, 
+            "INT": 10, 
+            "WIS": 12, 
             "CHA": 8
-        }
+            },
+        feats=["Lucky"]
     )
-    
+
     print(f"{my_character.name}'s Strength: {my_character.get_attribute_score('STR')}")
-    print(f"{my_character.name}'s Strength Modifier: {my_character.get_attribute_modifier('STR')}")
-
-    my_character.add_level("Fighter")
-    my_character.add_level("Fighter")
-    my_character.add_level("Wizard")
-    print(f"{my_character.name}'s Levels: {my_character.classes}")
-    print(f"{my_character.name}'s Proficiency Bonus: +{my_character.proficiency_bonus}")
-
-    my_character.apply_equipment_bonus("STR", 2)
-    print(f"{my_character.name}'s Strength with Equipment Bonus: {my_character.get_attribute_score('STR')}")
+    my_character.apply_equipment_bonus("STR", "Belt of Muscle", 2)
+    print(f"{my_character.name}'s Strength with Equipment: {my_character.get_attribute_score('STR')}")
+    my_character.set_attribute_override("OMT", 19)
+    print(f"{my_character.name}'s Intelligence with Override: {my_character.get_attribute_score('INT')}")
+    my_character.clear_attribute_override("INT")
+    print(f"{my_character.name}'s Intelligence after Override Cleared: {my_character.get_attribute_score('INT')}")
+    print(f"{my_character.name}'s Feats: {my_character.feats}")
