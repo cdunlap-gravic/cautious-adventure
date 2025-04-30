@@ -23,7 +23,7 @@ class Character:
         self.equipment_bonuses = {attr: [] for attr in base_attributes}
         self.boon_bonuses = {attr: [] for attr in base_attributes}
         self.curse_penalties = {attr: [] for attr in base_attributes}
-        self.attribute_overrides = {} # {attribute: override_value} This is for hard overrides like INT = 19.
+        self.attribute_overrides = {} # {attribute: (source, override_value)} This is for hard overrides like INT = 19.
         self.hit_points = {"current": 0, "maximum": 0, "temporary": 0}
         self.armor_class = 0
         self.initiative_bonus = 0
@@ -43,8 +43,8 @@ class Character:
         boon_bonus = sum(bonus for _, bonus in self.boon_bonuses.get(attribute, []))
         curse_penalty = sum(penalty for _, penalty in self.curse_penalties.get(attribute, []))   
         override = self.attribute_overrides.get(attribute)
-        return override if override is not None else base + level_bonus + equipment_bonus + boon_bonus - curse_penalty
-        
+        return override[1] if override is not None else base + level_bonus + equipment_bonus + boon_bonus - curse_penalty
+
     def get_attribute_modifier(self, attribute):
         """
         Calculates the modifier for a given attribute score.
@@ -76,7 +76,7 @@ class Character:
     
     def _update_proficiency_bonus(self):
         """
-        Calculates the profieciency bonus basedo nthe character's total level.
+        Calculates the profieciency bonus based on the character's total level.
         """
         total_level = sum(self.classes.values())
         if total_level < 5:
@@ -116,11 +116,11 @@ class Character:
     def remove_curse_penalty(self, attribute, source, penalty):
         self.curse_penalties[attribute] = [(s, p) for s, p in self.curse_penalties[attribute] if s != source or p != penalty]
 
-    def set_attribute_override(self, attribute, value):
-        self.attribute_overrides[attribute] = value
+    def set_attribute_override(self, attribute, source, value):
+        self.attribute_overrides[attribute] = (source, value)
 
-    def clear_attribute_override(self, attribute):
-        if attribute in self.attribute_overrides:
+    def clear_attribute_override(self, attribute, source):
+        if attribute in self.attribute_overrides and self.attribute_overrides[attribute][0] == source:
             del self.attribute_overrides[attribute]
     
     def add_feat(self, feat_name): #! need to flag back if feat exists on character on add attempt
@@ -151,8 +151,11 @@ if __name__ == "__main__":
     print(f"{my_character.name}'s Strength: {my_character.get_attribute_score('STR')}")
     my_character.apply_equipment_bonus("STR", "Belt of Muscle", 2)
     print(f"{my_character.name}'s Strength with Equipment: {my_character.get_attribute_score('STR')}")
-    my_character.set_attribute_override("OMT", 19)
+    my_character.set_attribute_override("INT", "Circlet of Knowledge", 19)
     print(f"{my_character.name}'s Intelligence with Override: {my_character.get_attribute_score('INT')}")
-    my_character.clear_attribute_override("INT")
+    my_character.clear_attribute_override("intelligence", "Circlet of Knowledge")
     print(f"{my_character.name}'s Intelligence after Override Cleared: {my_character.get_attribute_score('INT')}")
+
     print(f"{my_character.name}'s Feats: {my_character.feats}")
+    
+    
