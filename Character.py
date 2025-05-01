@@ -1,9 +1,11 @@
-def log_message(level, message):
+from Class import Fighter, Wizard
+
+def logMessage(level, message):
     #placeholder for our logging system
     print(f"[{level.upper()}] {message}")
 
 class Character:
-    def __init__(self, name, race, background, alignment, base_attributes, feats=None):
+    def __init__(self, name, race, background, alignment, baseAttributes, feats=None):
         """
         Initializes a new character.
 
@@ -12,132 +14,236 @@ class Character:
             race (str): The character's race.
             background (str): The character's background.
             alignment (str): The character's alignment.
-            base_attributes (dict): A dictionary containing the character's  base ability scores (e.g. {"strength":15, "dexterity": 12, ...}). 
+            baseAttributes (dict): A dictionary containing the character's  base ability scores (e.g. {"strength":15, "dexterity": 12, ...}).
+        
+        Params: #TODO flesh this list out later
+            name
+            race -> should point to a chart to pull stats/traits from
+            background
+            alignment
+            base attributes
+                STR, 
+            ...
         """
         self.name = name
         self.race = race
         self.background = background
         self.alignment = alignment
-        self.base_attributes = base_attributes
-        self.level_bonuses = {attr: 0 for attr in base_attributes} # Bonuses from level-based ASIs
-        self.equipment_bonuses = {attr: [] for attr in base_attributes}
-        self.boon_bonuses = {attr: [] for attr in base_attributes}
-        self.curse_penalties = {attr: [] for attr in base_attributes}
-        self.attribute_overrides = {} # {attribute: (source, override_value)} This is for hard overrides like INT = 19.
-        self.hit_points = {"current": 0, "maximum": 0, "temporary": 0}
-        self.armor_class = 0
-        self.initiative_bonus = 0
+        self.baseAttributes = baseAttributes
+        self.levelBonuses = {attr: 0 for attr in baseAttributes} # Bonuses from level-based ASIs
+        self.equipmentBonuses = {attr: [] for attr in baseAttributes}
+        self.boonBonuses = {attr: [] for attr in baseAttributes}
+        self.cursePenalties = {attr: [] for attr in baseAttributes}
+        self.attributeOverrides = {} # {attribute: (source, override_value)} This is for hard overrides like INT = 19.
+        self.hitPoints = {"current": 0, "maximum": 0, "temporary": 0}
+        self.armorClass = 0
+        self.initiativeBonus = 0
         self.speed = 0
         self.classes = {} # Dictionary to store class levels: {"Fighter": 3, "Wizard" : 2}
-        self.level_history = [] # List of (class_name, level_gained) tuples
-        self.proficiency_bonus = 2 # Base proficiency bonus starts at +2
+        self.levelHistory = [] # List of (className, level_gained) tuples
+        self.profBonus = 2 # Base proficiency bonus starts at +2
         self.feats = feats if feats is not None else []
+        self.skills = {
+            "Athletics": False,
+            "Acrobatics": False,
+            "Sleight of Hand": False,
+            "Stealth": False,
+            "Arcana": False,
+            "History": False,
+            "Investigation": False,
+            "Nature": False,
+            "Religion": False,
+            "Animal Handling": False,
+            "Insight": False,
+            "Medicine": False,
+            "Perception": False,
+            "Survival": False,
+            "Deception": False,
+            "Intimidation": False,
+            "Performance": False,
+            "Persuasion": False
+        }
+        self.savingThrowProf = {
+            "STR": False,
+            "DEX": False,
+            "CON": False,
+            "INT": False,
+            "WIS": False,
+            "CHA": False
+        }
         
-    def get_attribute_score(self, attribute):
+    def getAttributeScore(self, attribute):
         """
         Calculates the current effective score fore a given attribute.
         """
-        base = self.base_attributes.get(attribute, 0)
-        level_bonus = self.level_bonuses.get(attribute, 0)
-        equipment_bonus = sum(bonus for _, bonus in self.equipment_bonuses.get(attribute, []))
-        boon_bonus = sum(bonus for _, bonus in self.boon_bonuses.get(attribute, []))
-        curse_penalty = sum(penalty for _, penalty in self.curse_penalties.get(attribute, []))   
-        override = self.attribute_overrides.get(attribute)
-        return override[1] if override is not None else base + level_bonus + equipment_bonus + boon_bonus - curse_penalty
+        base = self.baseAttributes.get(attribute, 0)
+        levelBonus = self.levelBonuses.get(attribute, 0)
+        equipmentBonus = sum(bonus for _, bonus in self.equipmentBonuses.get(attribute, []))
+        boonBonus = sum(bonus for _, bonus in self.boonBonuses.get(attribute, []))
+        cursePenalty = sum(penalty for _, penalty in self.cursePenalties.get(attribute, []))   
+        override = self.attributeOverrides.get(attribute)
+        return override[1] if override is not None else base + levelBonus + equipmentBonus + boonBonus - cursePenalty
 
-    def get_attribute_modifier(self, attribute):
+    def getAttributeModifier(self, attribute):
         """
         Calculates the modifier for a given attribute score.
         """
-        score = self.get_attribute_score(attribute)
+        score = self.getAttributeScore(attribute)
         return (score // 2) - 5 # Floor division to round down
+    
+    def addLevel(self, className):
+        self.classes[className] = self.classes.get(className, 0) + 1
+        self.levelHistory.append((className, self.classes[className]))
+        self._updateProfBonus()
+        if className in self.classes:
+            level = self.classes[className]
+            if className == "Fighter" and level == 1:
+                fighter = Fighter() # Instantiate the class to get its properties
+                for skill in fighter.getSkillProfAtLevel(1): # Simplified for now
+                    self.applySkillProf(skill)
+                for save in fighter.getSavingThrowProf():
+                    self.applySavingThrowProf(save)
+            elif className == "Wizard" and level == 1:
+                wizard = Wizard()
+                for skill in wizard.getSkillProfAtLevel(1): # Simplified for now
+                    self.applySkillProf(skill)
+                for save in wizard.getSavingThrowProf():
+                    self.applySavingThrowProf(save)
+        # In the future, we'll need a more robust system for handling skill choices.
         
-    def add_level(self, class_name):
-        """
-        Increases the level in a specific class.
-        """
-        self.classes[class_name] = self.classes.get(class_name, 0) + 1
-        self.level_history.append((class_name, self.classes[class_name]))
-        self._update_proficiency_bonus() # Recalculate proficiency bonus on level up
-        #TODO trigger other level-based stat increases and otehr class feature unlocks etc.
-        
-    def reduce_level(self, class_name, levels_to_reduce=1, revert_stats=False):
+    def reduceLevel(self, className, levelsToReduce=1, revertStats=False):
         """
         Reduces the level in a specific class. Can optionally revert level_based stat increases. Possibly useful for rollback of levels, or a curse.
         """
-        if class_name in self.classes and self.classes[class_name] > 0:
-            self.classes[class_name] -= levels_to_reduce
-            if self.classes[class_name] < 0:
-                self.classes[class_name] = 0 # Ensure level doesn't go below 0
+        if className in self.classes and self.classes[className] > 0:
+            self.classes[className] -= levelsToReduce
+            if self.classes[className] < 0:
+                self.classes[className] = 0 # Ensure level doesn't go below 0
             
-            #TODO implement log ic to handle level history and potentially revert stats based on the 'revert_stats' flag and the level history. This will be more complex.
-            log_message("INFO", f"{self.name}'s level in {class_name} reduced to {self.classes[class_name]}.")
-            self._update_proficiency_bonus() # Recalculate proficiency bonus on level down
+            #TODO implement log ic to handle level history and potentially revert stats based on the 'revertStats' flag and the level history. This will be more complex.
+            logMessage("INFO", f"{self.name}'s level in {className} reduced to {self.classes[className]}.")
+            self._updateProfBonus() # Recalculate proficiency bonus on level down
     
-    def _update_proficiency_bonus(self):
+    def _updateProfBonus(self):
         """
         Calculates the profieciency bonus based on the character's total level.
         """
-        total_level = sum(self.classes.values())
-        if total_level < 5:
-            self.proficiency_bonus = 2
-        elif total_level < 9:
-            self.proficiency_bonus = 3
-        elif total_level < 13:
-            self.proficiency_bonus = 4
-        elif total_level < 17:
-            self.proficiency_bonus = 5
+        totalLevel = sum(self.classes.values())
+        if totalLevel < 5:
+            self.profBonus = 2
+        elif totalLevel < 9:
+            self.profBonus = 3
+        elif totalLevel < 13:
+            self.profBonus = 4
+        elif totalLevel < 17:
+            self.profBonus = 5
         else:
-            self.proficiency_bonus = 6
+            self.profBonus = 6
     
-    def apply_equipment_bonus(self, attribute, source, bonus):
+    def applyEquipmentBonus(self, attribute, source, bonus):
         """
         Applies a bonus to an attribute from equipment.
         """
-        self.equipment_bonuses[attribute].append((source, bonus))
+        self.equipmentBonuses[attribute].append((source, bonus))
     
-    def remove_equipment_bonus(self, attribute, source, bonus):
+    def removeEquipmentBonus(self, attribute, source, bonus):
         """
         Removes a bonus to an attribute from equipment.
         """
-        self.equipment_bonuses[attribute] = [(s, b) for s, b in self.equipment_bonuses[attribute] if s != source or b != bonus]
+        self.equipmentBonuses[attribute] = [(s, b) for s, b in self.equipmentBonuses[attribute] if s != source or b != bonus]
 
+    def applyBoonBonus(self, attribute, source, bonus):
+        self.boonBonuses[attribute].append((source, bonus))
+
+    def removeBoonBonus(self, attribute, source, bonus):
+        self.boonBonuses[attribute] = [(s, b) for s, b in self.boonBonuses[attribute] if s != source or b != bonus]
+
+    def applyCursePenalty(self, attribute, source, penalty):
+        self.cursePenalties[attribute].append((source, penalty))
+
+    def removeCursePenalty(self, attribute, source, penalty):
+        self.cursePenalties[attribute] = [(s, p) for s, p in self.cursePenalties[attribute] if s != source or p != penalty]
+
+    def setAttributeOverride(self, attribute, source, value):
+        self.attributeOverrides[attribute] = (source, value)
+
+    def clearAttributeOverride(self, attribute, source):
+        if attribute in self.attributeOverrides and self.attributeOverrides[attribute][0] == source:
+            del self.attributeOverrides[attribute]
     
-    #TODO add simlar methods for boon bonuses and curse penalties
-    def apply_boon_bonus(self, attribute, source, bonus):
-        self.boon_bonuses[attribute].append((source, bonus))
-
-    def remove_boon_bonus(self, attribute, source, bonus):
-        self.boon_bonuses[attribute] = [(s, b) for s, b in self.boon_bonuses[attribute] if s != source or b != bonus]
-
-    def apply_curse_penalty(self, attribute, source, penalty):
-        self.curse_penalties[attribute].append((source, penalty))
-
-    def remove_curse_penalty(self, attribute, source, penalty):
-        self.curse_penalties[attribute] = [(s, p) for s, p in self.curse_penalties[attribute] if s != source or p != penalty]
-
-    def set_attribute_override(self, attribute, source, value):
-        self.attribute_overrides[attribute] = (source, value)
-
-    def clear_attribute_override(self, attribute, source):
-        if attribute in self.attribute_overrides and self.attribute_overrides[attribute][0] == source:
-            del self.attribute_overrides[attribute]
+    def addFeat(self, featName): #! need to flag back if feat exists on character on add attempt
+        if featName not in self.feats:
+            self.feats.append(featName)
     
-    def add_feat(self, feat_name): #! need to flag back if feat exists on character on add attempt
-        if feat_name not in self.feats:
-            self.feats.append(feat_name)
+    def hasFeat(self, featName):
+        return featName in self.feats
     
-    def has_feat(self, feat_name):
-        return feat_name in self.feats
+    def applySkillProf(self, skill):
+        if skill in self.skills:
+            self.skills[skill] = True
+    
+    def removeSkillProf(self, skill):
+        if skill in self.skills:
+            self.skills[skill] = False
+        
+    def applySavingThrowProf(self, save):
+        if save in self.savingThrowProf:
+            self.savingThrowProf[save] = True
+
+    def hasSkillProf(self, skill):
+        return self.skills.get(skill, False)
+            
+    def hasSavingThrowProf(self, save):
+        return self.savingThrowProf.get(save, False)
+    
+    def getSkillCheckBonus(self, skill):
+        if self.hasSkillProf(skill):
+            ability = self._getSkillAbility(skill)
+            return self.getAttributeModifier(ability) + self.profBonus
+    
+    def getSavingThrowBonus(self, save):
+        modifier = self.getAttributeModifier(save)
+        if self.hasSavingThrowProf(save):
+            return modifier + self.profBonus
+        else:
+            return modifier
+    
+    def _getSkillAbility(self, skill):
+        """
+        Helper function to map skills to their governing abilities.
+        """
+        skillAbilities = {
+            "Athletics": "STR",
+            "Acrobatics": "DEX",
+            "Sleight of Hand": "DEX",
+            "Stealth": "DEX",
+            "Arcana": "INT",
+            "History": "INT",
+            "Investigation": "INT",
+            "Nature": "INT",
+            "Religion": "INT",
+            "Animal Handling": "WIS",
+            "Insight": "WIS",
+            "Medicine": "WIS",
+            "Perception": "WIS",
+            "Survival": "WIS",
+            "Deception": "CHA",
+            "Intimidation": "CHA",
+            "Performance": "CHA",
+            "Persuasion": "CHA"
+        }
+        return skillAbilities.get(skill, None)
+            
+
     
 #example instantiation:
 if __name__ == "__main__":
-    my_character = Character(
+    myCharacter = Character(
         name="Anya",
         race="Half-Elf",
         background="Noble",
         alignment="Chaotic Good",
-        base_attributes={
+        baseAttributes={
             "STR": 14, 
             "DEX": 13, 
             "CON": 15, 
@@ -148,14 +254,18 @@ if __name__ == "__main__":
         feats=["Lucky"]
     )
 
-    print(f"{my_character.name}'s Strength: {my_character.get_attribute_score('STR')}")
-    my_character.apply_equipment_bonus("STR", "Belt of Muscle", 2)
-    print(f"{my_character.name}'s Strength with Equipment: {my_character.get_attribute_score('STR')}")
-    my_character.set_attribute_override("INT", "Circlet of Knowledge", 19)
-    print(f"{my_character.name}'s Intelligence with Override: {my_character.get_attribute_score('INT')}")
-    my_character.clear_attribute_override("intelligence", "Circlet of Knowledge")
-    print(f"{my_character.name}'s Intelligence after Override Cleared: {my_character.get_attribute_score('INT')}")
+    myCharacter.addLevel("Fighter")
+    print(f"{myCharacter.name}'s Fighter Level: {myCharacter.classes.get('Fighter', 0)}")
+    print(f"{myCharacter.name}'s Saving Throw Proficiencies: {myCharacter.savingThrowProf}")
+    print(f"{myCharacter.name}'s Skill Proficiencies: {myCharacter.skills}")
+    print(f"{myCharacter.name}'s Athletics Check Bonus: +{myCharacter.getSkillCheckBonus('Athletics')}")
+    print(f"{myCharacter.name}'s Stealth Check Bonus: +{myCharacter.getSkillCheckBonus('Stealth')}")
+    print(f"{myCharacter.name}'s Strength Save Bonus: +{myCharacter.getSavingThrowBonus('Strength')}")
 
-    print(f"{my_character.name}'s Feats: {my_character.feats}")
-    
-    
+    myCharacter.addLevel("Wizard")
+    print(f"{myCharacter.name}'s Wizard Level: {myCharacter.classes.get('Wizard', 0)}")
+    print(f"{myCharacter.name}'s Saving Throw Proficiencies: {myCharacter.savingThrowProf}")
+    print(f"{myCharacter.name}'s Skill Proficiencies: {myCharacter.skills}")
+    print(f"{myCharacter.name}'s Arcana Check Bonus: +{myCharacter.getSkillCheckBonus('Arcana')}")
+    print(f"{myCharacter.name}'s Intelligence Save Bonus: +{myCharacter.getSavingThrowBonus('Intelligence')}")
+        
