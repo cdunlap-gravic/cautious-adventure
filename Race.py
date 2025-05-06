@@ -5,13 +5,17 @@ def registeredRace(cls):
     return cls
 
 class Race:
-    def __init__(self, name, abilityBonuses, racialTraits, speed, languages, size):
+    def __init__(self, name, abilityBonuses, racialTraits, speed, languages, size, flySpeed=0, swimSpeed=0, climbSpeed=0, burrowSpeed=0):
         self.name = name
         self.abilityBonuses = abilityBonuses
         self.racialTraits = racialTraits
         self.speed = speed
         self.languages = languages
         self.size = size
+        self.flySpeed = flySpeed
+        self.swimSpeed = swimSpeed
+        self.climbSpeed = climbSpeed
+        self.burrowSpeed = burrowSpeed
 
 @registeredRace
 class Human(Race):
@@ -29,7 +33,11 @@ class Human(Race):
             racialTraits=["Extra Language"], # We'll handle the choice later
             speed=30,
             languages=["Common"],
-            size="Medium"
+            size="Medium",
+            flySpeed=0,
+            swimSpeed=0,
+            climbSpeed=0,
+            burrowSpeed=0
         )
 
 @registeredRace
@@ -48,7 +56,11 @@ class Dwarf(Race):
                 "Common", 
                 "Dwarvish"
             ],
-            size="Medium"
+            size="Medium",
+            flySpeed=0,
+            swimSpeed=0,
+            climbSpeed=0,
+            burrowSpeed=0
         )
 
 def getAvailableRaces():

@@ -48,7 +48,14 @@ class Character:
         self.hitPoints = {"current": 0, "maximum": 0, "temporary": 0}
         self.armorClass = 0
         self.initiativeBonus = 0
+        
+        #@ Movement Speeds 
         self.speed = 0
+        self.flySpeed = 0
+        self.swimSpeed = 0
+        self.climbSpeed = 0
+        self.burrowSpeed = 0
+        
         self.classes = {} # Dictionary to store class levels: {"Fighter": 3, "Wizard" : 2}
         self.levelHistory = [] # List of (className, level_gained) tuples
         self.profBonus = 2 # Base proficiency bonus starts at +2
@@ -95,6 +102,10 @@ class Character:
         if self.race and self.race in AVAILABLE_RACES:
             race_obj = AVAILABLE_RACES[self.race]()
             self.speed = race_obj.speed
+            self.flySpeed = race_obj.flySpeed
+            self.swimSpeed = race_obj.swimSpeed
+            self.climbSpeed = race_obj.climbSpeed
+            self.burrowSpeed = race_obj.burrowSpeed
             self.languages.extend(race_obj.languages)
             self.size = race_obj.size
             self.racialTraits.extend(race_obj.racialTraits)
@@ -375,3 +386,17 @@ if __name__ == "__main__":
 
     anya_to_level.addLevel("Wizard")
     print(f"Anya's Saving Throw Proficiencies after level 1 Wizard: {anya_to_level.savingThrowProf}")
+    
+    print("\n--- Human Speed Test ---")
+    print(f"{humanCharacter.name}'s Speed: {humanCharacter.speed}")
+    print(f"{humanCharacter.name}'s Fly Speed: {humanCharacter.flySpeed}")
+    print(f"{humanCharacter.name}'s Swim Speed: {humanCharacter.swimSpeed}")
+    print(f"{humanCharacter.name}'s Climb Speed: {humanCharacter.climbSpeed}")
+    print(f"{humanCharacter.name}'s Burrow Speed: {humanCharacter.burrowSpeed}")
+
+    print("\n--- Dwarf Speed Test ---")
+    print(f"{dwarfCharacter.name}'s Speed: {dwarfCharacter.speed}")
+    print(f"{dwarfCharacter.name}'s Fly Speed: {dwarfCharacter.flySpeed}")
+    print(f"{dwarfCharacter.name}'s Swim Speed: {dwarfCharacter.swimSpeed}")
+    print(f"{dwarfCharacter.name}'s Climb Speed: {dwarfCharacter.climbSpeed}")
+    print(f"{dwarfCharacter.name}'s Burrow Speed: {dwarfCharacter.burrowSpeed}")
