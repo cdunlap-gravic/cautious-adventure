@@ -122,53 +122,78 @@ class Character:
         return (score // 2) - 5 # Floor division to round down
     
     def addLevel(self, className):
-        self.classes[className] = self.classes.get(className, 0) + 1
-        self.levelHistory.append((className, self.classes[className]))
-        self._updateProfBonus()
+        if className in AVAILABLE_CLASSES:
+            if className not in self.classes:
+                self.classes[className] = 1
+                self.levelHistory.append((className, 1))
+                logMessage("info", f"{self.name} gained their first level in {className}!")
+
+        # Apply saving throw prof for the first level
+        class_def = AVAILABLE_CLASSES[className]()
+        saving_throws = class_def.getSavingThrowProf()
+        for save in saving_throws:
+            if save in self.savingThrowProf:
+                self.savingThrowProf[save] = True
+                logMessage("info", f"Proficiency in '{save}' saving throws applied.")
         
-        level = self.classes[className]
-        
-        #@ Definining LV1 choices, ie skill profs etc. Needed for character creation and first level in multiclassing in all systems
-        if level == 1:
-            classDefinition = AVAILABLE_CLASSES.get(className)
-            if classDefinition:
-                instance = classDefinition()
-                numChoices, availableSkills = instance.getSkillProfAtLevel(1)
-                if numChoices > 0:
-                    print(f"\n{self.name} gained their first level in {className}!")
-                    print(f"Choose {numChoices} skill proficiencies from the following list:")
-                    for i, skill in enumerate(availableSkills):
-                        print(f"{i + 1}. {skill}")
-                        
-                    chosenSkills = []
-                    while len(chosenSkills) < numChoices:
-                        choice = input(f"Enter the number for skill {len(chosenSkills) + 1}: ").strip()
-                        if choice.isdigit():
-                            index = int(choice) - 1
-                            if 0 <= index < len(availableSkills):
-                                skill = availableSkills[index]
-                                if skill not in self.skills or not self.skills[skill]:
-                                    self.applySkillProf(skill)
-                                    chosenSkills.append(skill)
-                                    print(f"Proficiency in '{skill}' applied.")
-                                else:
-                                    print(f"You are already proficient in '{skill}'. Please choose another.")
+        # Handle skill profs at level 1
+        numChoices, availableSkills = class_def.getSkillProfAtLevel(1)
+        if numChoices > 0:
+            print(f"Choose {numChoices} skill proficiencies from the following list:")
+            for i, skill in enumerate(availableSkills, 1):
+                print(f"{i}. {skill}")
+            chosenSkills = set()
+            for i in range(numChoices):
+                while True:
+                    try:
+                        choice = int(input(f"Enter the number for skill {i+1}: "))
+                        if 1 <= choice <= len(availableSkills):
+                            chosenSkill = availableSkills[choice - 1]
+                            if chosenSkill not in chosenSkills:
+                                self.applySkillProf(chosenSkill)
+                                chosenSkills.add(chosenSkill)
+                                logMessage("info", f"Proficiency in '{chosenSkill}' applied.")
+                                break
                             else:
-                                print("Invalid choice. Please enter a number from the list.")
+                                print(f"You are already proficient in '{chosenSkill}'. Please choose another.")
                         else:
+                            print("Invalid input. Please enter a number from the list.")
+                    except ValueError:
+                        print("Invalid input. Please enter a number.")
+                logMessage("info", "Skill proficiencies chosen.")
+        else:
+            self.classes[className] += 1
+            self.levelHistopry.append((className, self.classes[className]))
+            logMessage("info", f"{self.name} gained a level in {className}! They are now level {self.classes[className]}.")
+            # Handle skill proficiencies at subsequent levels (if any)
+            class_def = AVAILABLE_CLASSES[className]()
+            numChoices, availableSkills = class_def.getSkillProfAtLevel(self.classes[className])
+            if numChoices > 0:
+                print(f"Choose {numChoices} additional skill proficiencies from the following list:")
+                for i, skill in enumerate(availableSkills, 1):
+                    print(f"{i}. {skill}")
+                chosenSkills = set()
+                for i in range(numChoices):
+                    while True:
+                        try:
+                            choice = int(input(f"Enter the number for skill {i+1}: "))
+                            if 1 <= choice <= len(availableSkills):
+                                chosenSkill = availableSkills[choice - 1]
+                                if chosenSkill not in self.skills or not self.skills[chosenSkill]:
+                                    self.applySkillProf(chosenSkill)
+                                    chosenSkills.add(chosenSkill)
+                                    logMessage("info", f"Proficiency in '{chosenSkill}' applied.")
+                                    break
+                                else:
+                                    print(f"You are already proficient in '{chosenSkill}'. Please choose another.")
+                            else:
+                                print("Invalid input. Please enter a number from the list.")
+                        except ValueError:
                             print("Invalid input. Please enter a number.")
-                    print("Skill proficiencies chosen.")
-                
-                # Apply saving throw proficiencies for the first level
-                for save in instance.getSavingThrowProf():
-                    self.applySavingThrowProf(save)
+                logMessage("info", "Skill proficiencies chosen.")
+            else:
+                logMessage("error", f"Class '{className}' not found.")
             
-            # For subsequent levels or other classes, we'll add more logic here later
-        elif className in AVAILABLE_CLASSES and level >= 1:
-            instance = AVAILABLE_CLASSES[className]()
-            for save in instance.getSavingThrowProf():
-                self.applySavingThrowProf(save)
-        
         
         
     def reduceLevel(self, className, levelsToReduce=1, revertStats=False):
@@ -335,22 +360,18 @@ if __name__ == "__main__":
     print(f"Size: {dwarfCharacter.size}")
     
 
-    # Test Saving
-    anya_to_save = Character(
-        name="AnyaForSave",
+    anya_to_level = Character(
+        name="AnyaLevelTest",
         race="Half-Elf",
         background="Noble",
         alignment="Chaotic Good",
-        baseAttributes={"STR": 14, "DEX": 13, "CON": 15, "INT": 10, "WIS": 12, "CHA": 8},
+        baseAttributes={"STR": 10, "DEX": 10, "CON": 10, "INT": 10, "WIS": 10, "CHA": 10},
         feats=["Lucky"]
     )
-    save_character(anya_to_save, "anya_save.json")
 
-    # Test Loading
-    loaded_anya = load_character("anya_save.json")
-    if loaded_anya:
-        print("\n--- Loaded Anya ---")
-        print(f"Name: {loaded_anya.name}")
-        print(f"Race: {loaded_anya.race}")
-        print(f"Base Attributes: {loaded_anya.baseAttributes}")
-        print(f"Skills: {loaded_anya.skills}")
+    print("\n--- Anya Level Test ---")
+    anya_to_level.addLevel("Fighter")
+    print(f"Anya's Saving Throw Proficiencies after level 1 Fighter: {anya_to_level.savingThrowProf}")
+
+    anya_to_level.addLevel("Wizard")
+    print(f"Anya's Saving Throw Proficiencies after level 1 Wizard: {anya_to_level.savingThrowProf}")

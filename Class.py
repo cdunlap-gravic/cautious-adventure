@@ -6,17 +6,6 @@ def registeredClass(cls):
 
 class Class:
     def __init__(self, name, hitDice, savingThrowProf, skillProf, levelFeatures):
-        """
-        Base class for D&D 5e classes.
-
-        Args:
-            name (str): The name of the class (e.g., "Fighter", "Wizard").
-            hitDice (str): The type of hit die used by the class (e.g., "d10", "d6").
-            savingThrowProf (list): A list of saving throw abilities the class is proficient in (e.g., ["strength", "constitution"]).
-            skillProf (dict): A dictionary where keys are the number of skill prof to choose,
-                                        and values are lists of available skills (e.g., {2: ["athletics", "acrobatics", ... ]}).
-            levelFeatures (dict): A dictionary where keys are level numbers and values are lists of features gained at that level.
-        """
         self.name = name
         self.hitDice = hitDice
         self.savingThrowProf = savingThrowProf
@@ -24,27 +13,18 @@ class Class:
         self.levelFeatures = levelFeatures
         
     def getSkillProfAtLevel(self, level):
-        """
-        Returns the skill prof gained from this class up to the given level.
-        This is a simplified approach; in reality, skill choices are made at 1st level.
-        We'll refine this later.
-        """
-        if level == 1 and 1 in self.skillProf:
-            return self.skillProf[1]
-        elif level in self.skillProf: # For later levels that might just provide a list
-            return (1, self.skillProf[level]) # Assuming 1 choice from the list
-        return (0, []) # Default return if no skill proficiencies at this level
+        if level in self.skillProf:
+            if isinstance(self.skillProf[level], tuple):
+                return self.skillProf[level]
+            else:
+                # For level 2+ skill proficiencies (just a list), no choices are given
+                return (0, self.skillProf[level])
+        return (0, [])
 
     def getSavingThrowProf(self):
-        """
-        Returns the saving throw prof of this class.
-        """
         return self.savingThrowProf
     
     def getLevelFeatures(self, level):
-        """
-        Returns a list of features gained at the specified level.
-        """    
         return self.levelFeatures.get(level, [])
     
 
