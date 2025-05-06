@@ -1,3 +1,9 @@
+_registeredClasses = {}
+
+def registeredClass(cls):
+    _registeredClasses[cls.__name__] = cls
+    return cls
+
 class Class:
     def __init__(self, name, hitDice, savingThrowProf, skillProf, levelFeatures):
         """
@@ -42,6 +48,7 @@ class Class:
         return self.levelFeatures.get(level, [])
     
 
+@registeredClass
 class Fighter(Class):
     def __init__(self):
         super().__init__(
@@ -98,6 +105,7 @@ class Fighter(Class):
             
         )
 
+@registeredClass
 class Wizard(Class):
     def __init__(self):
         super().__init__(
@@ -140,3 +148,7 @@ class Wizard(Class):
                 20: ["Signature Spells"]
             }
         )
+
+
+def getAvailableClasses():
+    return _registeredClasses

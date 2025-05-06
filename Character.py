@@ -1,14 +1,15 @@
-from Class import Fighter, Wizard
+
+from Class import getAvailableClasses
+from Background import getAvailableBackgrounds
+
+AVAILABLE_CLASSES = getAvailableClasses()
+AVAILABLE_BACKGROUNDS = getAvailableBackgrounds()
+
 
 def logMessage(level, message):
     #placeholder for our logging system
     print(f"[{level.upper()}] {message}")
-
-AVAILABLE_CLASSES = {
-    "Fighter": Fighter,
-    "Wizard": Wizard,
-    # Add other classes here as we create them
-}
+    
 
 class Character:
     def __init__(self, name, race, background, alignment, baseAttributes, feats=None):
@@ -77,6 +78,12 @@ class Character:
             "WIS": False,
             "CHA": False
         }
+    
+        if self.background and self.background in AVAILABLE_BACKGROUNDS:
+            background_obj = AVAILABLE_BACKGROUNDS[self.background]()
+            for skill in background_obj.skillProf:
+                self.applySkillProf(skill)
+        
         
     def getAttributeScore(self, attribute):
         """
@@ -277,14 +284,28 @@ if __name__ == "__main__":
     myCharacter = Character(
         name="Anya",
         race="Half-Elf",
-        background="Noble",
+        background="Noble",  # Set the background here
         alignment="Chaotic Good",
         baseAttributes={"STR": 14, "DEX": 13, "CON": 15, "INT": 10, "WIS": 12, "CHA": 8},
         feats=["Lucky"]
     )
+
+    print(f"Initial skills for Anya (Noble background): {myCharacter.skills}")
 
     myCharacter.addLevel("Fighter")
     print(f"\n{myCharacter.name}'s Skill Proficiencies after level 1 Fighter: {myCharacter.skills}")
 
     myCharacter.addLevel("Wizard")
     print(f"\n{myCharacter.name}'s Skill Proficiencies after level 1 Wizard: {myCharacter.skills}")
+
+    # Let's create another character with a different background
+    anotherCharacter = Character(
+        name="Roric",
+        race="Dwarf",
+        background="Criminal",  # Set a different background
+        alignment="Neutral Evil",
+        baseAttributes={"STR": 16, "DEX": 12, "CON": 14, "INT": 10, "WIS": 11, "CHA": 9},
+        feats=[]
+    )
+
+    print(f"\nInitial skills for Roric (Criminal background): {anotherCharacter.skills}")
