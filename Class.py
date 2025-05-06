@@ -23,10 +23,12 @@ class Class:
         This is a simplified approach; in reality, skill choices are made at 1st level.
         We'll refine this later.
         """
-        if 1 in self.skillProf:
+        if level == 1 and 1 in self.skillProf:
             return self.skillProf[1]
-        return []
-    
+        elif level in self.skillProf: # For later levels that might just provide a list
+            return (1, self.skillProf[level]) # Assuming 1 choice from the list
+        return (0, []) # Default return if no skill proficiencies at this level
+
     def getSavingThrowProf(self):
         """
         Returns the saving throw prof of this class.
@@ -48,17 +50,29 @@ class Fighter(Class):
             savingThrowProf=[
                 "STR", 
                 "CON"
-                ],
-            skillProf={2: [
-                "Athletics", 
-                "Acrobatics", 
-                "Animal Handling", 
-                "History", 
-                "Insight", 
-                "Intimidation", 
-                "Perception", 
-                "Survival"
-                ]},
+            ],
+            skillProf={
+                1: (2, [
+                    "Athletics", 
+                    "Acrobatics", 
+                    "Animal Handling", 
+                    "History", 
+                    "Insight", 
+                    "Intimidation", 
+                    "Perception", 
+                    "Survival"
+                    ]),
+                2: [
+                    "Athletics", 
+                    "Acrobatics", 
+                    "Animal Handling", 
+                    "History", 
+                    "Insight", 
+                    "Intimidation", 
+                    "Perception", 
+                    "Survival"
+                ]
+            },
             levelFeatures={
                 1: ["Fighting Style", "Second Wind"],
                 2: ["Action Surge"],
@@ -92,15 +106,24 @@ class Wizard(Class):
             savingThrowProf=[
                 "INT", 
                 "WIS"
-                ],
-            skillProf={2: [
-                "Arcana", 
-                "History", 
-                "Insight", 
-                "Investigation", 
-                "Medicine", 
-                "Religion"
-                ]},
+            ],
+            skillProf={
+                1: (2, [
+                    "Arcana", 
+                    "History", 
+                    "Insight", 
+                    "Investigation", 
+                    "Medicine", 
+                    "Religion"]),
+                2: [
+                    "Arcana", 
+                    "History", 
+                    "Insight", 
+                    "Investigation", 
+                    "Medicine", 
+                    "Religion"
+                ]
+            },
             levelFeatures={
                 1: ["Spellcasting", "Arcane Recovery"],
                 2: ["Arcane Tradition"],
