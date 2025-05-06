@@ -1,0 +1,92 @@
+{
+    "name": "AnyaForSave",
+    "race": "Half-Elf",
+    "background": "Noble",
+    "alignment": "Chaotic Good",
+    "baseAttributes": {
+        "STR": 14,
+        "DEX": 13,
+        "CON": 15,
+        "INT": 10,
+        "WIS": 12,
+        "CHA": 8
+    },
+    "levelBonuses": {
+        "STR": 0,
+        "DEX": 0,
+        "CON": 0,
+        "INT": 0,
+        "WIS": 0,
+        "CHA": 0
+    },
+    "equipmentBonuses": {
+        "STR": [],
+        "DEX": [],
+        "CON": [],
+        "INT": [],
+        "WIS": [],
+        "CHA": []
+    },
+    "boonBonuses": {
+        "STR": [],
+        "DEX": [],
+        "CON": [],
+        "INT": [],
+        "WIS": [],
+        "CHA": []
+    },
+    "cursePenalties": {
+        "STR": [],
+        "DEX": [],
+        "CON": [],
+        "INT": [],
+        "WIS": [],
+        "CHA": []
+    },
+    "attributeOverrides": {},
+    "hitPoints": {
+        "current": 0,
+        "maximum": 0,
+        "temporary": 0
+    },
+    "armorClass": 0,
+    "initiativeBonus": 0,
+    "speed": 0,
+    "classes": {},
+    "levelHistory": [],
+    "profBonus": 2,
+    "feats": [
+        "Lucky"
+    ],
+    "skills": {
+        "Athletics": false,
+        "Acrobatics": false,
+        "Sleight of Hand": false,
+        "Stealth": false,
+        "Arcana": false,
+        "History": true,
+        "Investigation": false,
+        "Nature": false,
+        "Religion": false,
+        "Animal Handling": false,
+        "Insight": false,
+        "Medicine": false,
+        "Perception": false,
+        "Survival": false,
+        "Deception": false,
+        "Intimidation": false,
+        "Performance": false,
+        "Persuasion": true
+    },
+    "savingThrowProf": {
+        "STR": false,
+        "DEX": false,
+        "CON": false,
+        "INT": false,
+        "WIS": false,
+        "CHA": false
+    },
+    "racialTraits": [],
+    "languages": [],
+    "size": "Medium"
+}
