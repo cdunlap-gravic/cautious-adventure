@@ -1,16 +1,16 @@
-
 from Class import getAvailableClasses
 from Background import getAvailableBackgrounds
+from Race import getAvailableRaces
 
 AVAILABLE_CLASSES = getAvailableClasses()
 AVAILABLE_BACKGROUNDS = getAvailableBackgrounds()
-
+AVAILABLE_RACES = getAvailableRaces()
 
 def logMessage(level, message):
     #placeholder for our logging system
     print(f"[{level.upper()}] {message}")
     
-
+    
 class Character:
     def __init__(self, name, race, background, alignment, baseAttributes, feats=None):
         """
@@ -78,12 +78,26 @@ class Character:
             "WIS": False,
             "CHA": False
         }
-    
+        self.racialTraits = []
+        self.languages = []
+        self.size = "Medium" # Default size
+        
+        # Apply background skill prociciencies
         if self.background and self.background in AVAILABLE_BACKGROUNDS:
             background_obj = AVAILABLE_BACKGROUNDS[self.background]()
             for skill in background_obj.skillProf:
                 self.applySkillProf(skill)
         
+        # Apply racial traits
+        if self.race and self.race in AVAILABLE_RACES:
+            race_obj = AVAILABLE_RACES[self.race]()
+            self.speed = race_obj.speed
+            self.languages.extend(race_obj.languages)
+            self.size = race_obj.size
+            self.racialTraits.extend(race_obj.racialTraits)
+            for ability, bonus in race_obj.abilityBonuses.items():
+                if ability in self.baseAttributes:
+                    self.baseAttributes[ability] += bonus
         
     def getAttributeScore(self, attribute):
         """
@@ -281,31 +295,38 @@ class Character:
     
 #example instantiation:
 if __name__ == "__main__":
-    myCharacter = Character(
-        name="Anya",
-        race="Half-Elf",
-        background="Noble",  # Set the background here
-        alignment="Chaotic Good",
-        baseAttributes={"STR": 14, "DEX": 13, "CON": 15, "INT": 10, "WIS": 12, "CHA": 8},
-        feats=["Lucky"]
-    )
-
-    print(f"Initial skills for Anya (Noble background): {myCharacter.skills}")
-
-    myCharacter.addLevel("Fighter")
-    print(f"\n{myCharacter.name}'s Skill Proficiencies after level 1 Fighter: {myCharacter.skills}")
-
-    myCharacter.addLevel("Wizard")
-    print(f"\n{myCharacter.name}'s Skill Proficiencies after level 1 Wizard: {myCharacter.skills}")
-
-    # Let's create another character with a different background
-    anotherCharacter = Character(
-        name="Roric",
-        race="Dwarf",
-        background="Criminal",  # Set a different background
-        alignment="Neutral Evil",
-        baseAttributes={"STR": 16, "DEX": 12, "CON": 14, "INT": 10, "WIS": 11, "CHA": 9},
+    # Test Human
+    humanCharacter = Character(
+        name="Alice",
+        race="Human",
+        background="Folk Hero",
+        alignment="Neutral Good",
+        baseAttributes={"STR": 10, "DEX": 10, "CON": 10, "INT": 10, "WIS": 10, "CHA": 10},
         feats=[]
     )
+    print("\n--- Human Test ---")
+    print(f"Name: {humanCharacter.name}")
+    print(f"Race: {humanCharacter.race}")
+    print(f"Base Attributes after racial bonuses: {humanCharacter.baseAttributes}")
+    print(f"Racial Traits: {humanCharacter.racialTraits}")
+    print(f"Speed: {humanCharacter.speed}")
+    print(f"Languages: {humanCharacter.languages}")
+    print(f"Size: {humanCharacter.size}")
 
-    print(f"\nInitial skills for Roric (Criminal background): {anotherCharacter.skills}")
+    # Test Dwarf
+    dwarfCharacter = Character(
+        name="Borin",
+        race="Dwarf",
+        background="Guild Artisan",
+        alignment="Lawful Good",
+        baseAttributes={"STR": 10, "DEX": 10, "CON": 10, "INT": 10, "WIS": 10, "CHA": 10},
+        feats=[]
+    )
+    print("\n--- Dwarf Test ---")
+    print(f"Name: {dwarfCharacter.name}")
+    print(f"Race: {dwarfCharacter.race}")
+    print(f"Base Attributes after racial bonuses: {dwarfCharacter.baseAttributes}")
+    print(f"Racial Traits: {dwarfCharacter.racialTraits}")
+    print(f"Speed: {dwarfCharacter.speed}")
+    print(f"Languages: {dwarfCharacter.languages}")
+    print(f"Size: {dwarfCharacter.size}")
