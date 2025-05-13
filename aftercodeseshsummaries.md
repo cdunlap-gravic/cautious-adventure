@@ -1,4 +1,5 @@
-**Summary of Today's Progress:**
+
+# * **Summary of Today's Progress:**
 
 Today, we laid the foundational groundwork for our D&D 5e character sheet backend in Python. Our primary focus was on the core representation of a character through the `Character` module. We achieved the following:
 

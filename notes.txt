@@ -1,0 +1,5 @@
+I need to do a whole rewrite of this code.
+I think I got as far as I could w/ Gemini's help. Let's start by reworking the side scripts like Class, Race, Background, etc.
+
+
+already rewrote race. Working on class now, next on the list is a rewrite on backgrounds, and then character.

@@ -34,6 +34,15 @@ class Character:
             base attributes
                 STR, 
             ...
+            
+            
+        #TODO Calculate HP
+        
+        https://www.omnicalculator.com/other/hit-points good resource for this
+        
+        We just need to make sure it has a configureable rule (later on) but for NOW, we're goign to do it the way I set up Brammus's HP:
+        MAx_HP (163) = 2d10 + 10d8 + 101
+        
         """
         self.name = name
         self.race = race
@@ -174,7 +183,7 @@ class Character:
                 logMessage("info", "Skill proficiencies chosen.")
         else:
             self.classes[className] += 1
-            self.levelHistopry.append((className, self.classes[className]))
+            self.levelHistory.append((className, self.classes[className]))
             logMessage("info", f"{self.name} gained a level in {className}! They are now level {self.classes[className]}.")
             # Handle skill proficiencies at subsequent levels (if any)
             class_def = AVAILABLE_CLASSES[className]()
@@ -387,16 +396,3 @@ if __name__ == "__main__":
     anya_to_level.addLevel("Wizard")
     print(f"Anya's Saving Throw Proficiencies after level 1 Wizard: {anya_to_level.savingThrowProf}")
     
-    print("\n--- Human Speed Test ---")
-    print(f"{humanCharacter.name}'s Speed: {humanCharacter.speed}")
-    print(f"{humanCharacter.name}'s Fly Speed: {humanCharacter.flySpeed}")
-    print(f"{humanCharacter.name}'s Swim Speed: {humanCharacter.swimSpeed}")
-    print(f"{humanCharacter.name}'s Climb Speed: {humanCharacter.climbSpeed}")
-    print(f"{humanCharacter.name}'s Burrow Speed: {humanCharacter.burrowSpeed}")
-
-    print("\n--- Dwarf Speed Test ---")
-    print(f"{dwarfCharacter.name}'s Speed: {dwarfCharacter.speed}")
-    print(f"{dwarfCharacter.name}'s Fly Speed: {dwarfCharacter.flySpeed}")
-    print(f"{dwarfCharacter.name}'s Swim Speed: {dwarfCharacter.swimSpeed}")
-    print(f"{dwarfCharacter.name}'s Climb Speed: {dwarfCharacter.climbSpeed}")
-    print(f"{dwarfCharacter.name}'s Burrow Speed: {dwarfCharacter.burrowSpeed}")

@@ -52,8 +52,8 @@ class BaseBackground(Background): # Inherit from the base Background class
     def __init__(self):
         super().__init__(
             name="Your Background Name",
-            skillProficiencies=["Skill 1", "Skill 2"], # List of skills
-            toolProficiencies=["Tool 1", "Tool 2"], # List of tools (can be empty)
+            skillProf=["Skill 1", "Skill 2"], # List of skills
+            toolProf=["Tool 1", "Tool 2"], # List of tools (can be empty)
             languages=["Language 1", "Language 2"], # List of languages (can be empty)
             # equipment=["Item 1", "Item 2"], # We'll handle equipment later
             feature="Your Background Feature Name" # Brief description of the feature
@@ -64,8 +64,8 @@ class YourBackgroundName(BaseBackground): # Create a new class for your backgrou
         super().__init__()
         # Override any default values here if needed
         self.name = "Your Specific Background Name"
-        self.skillProficiencies = ["Specific Skill 1", "Specific Skill 2"]
-        self.toolProficiencies = ["Specific Tool"]
+        self.skillProf = ["Specific Skill 1", "Specific Skill 2"]
+        self.toolProf = ["Specific Tool"]
         self.languages = ["Specific Language"]
         self.feature = "A unique feature for this background"
         
