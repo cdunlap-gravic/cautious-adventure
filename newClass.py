@@ -17,32 +17,24 @@ def getAvailableClasses():
     return _registeredClasses
 
 
-class newClass:
-    def __init__(self, name, hitDice, savingThrowProf):
-        pass
-
-
 class Class:
-    def __init__(self, name, hitDice, savingThrowProf, skillProf, levelFeatures):
+    def __init__(self, name, hitDie, savingThrowProf, skillProf, weaponProf, armorProf, startingEquipment, levelFeatures, spellSlotTree=None, spellsKnownAtLevel=None, cantripsKnownAtLevel=None):
         self.name = name
-        self.hitDice = hitDice
+        self.hitDie = hitDie
         self.savingThrowProf = savingThrowProf
         self.skillProf = skillProf
-        self.levelFeatures = levelFeatures
+        self.weaponProf = weaponProf if weaponProf else []
+        self.armorProf = armorProf if armorProf else []
+        self.startingEquipment = startingEquipment if startingEquipment else []
+        self.levelFeatures = levelFeatures if levelFeatures else {}
+        self.spellSlotTree = spellSlotTree if spellSlotTree else None
+        self.spellsKnownAtLevel = spellsKnownAtLevel if spellsKnownAtLevel else {}
+        self.cantripsKnownAtLevel = cantripsKnownAtLevel if cantripsKnownAtLevel else {}
+        self.spellPool = None
+        
 
-####?! WHY DO I NEED THESE FUNCTIONS? THESE SHOULD BE CALCULATED HERE? THIS SHOULD COME FROM CHARACTER. Character should be calculating any stats, not the class. Class should only handle things related to the class itself.
- 
-    def getSkillProfAtLevel(self, level):
-        if level in self.skillProf:
-            if isinstance(self.skillProf[level], tuple):
-                return self.skillProf[level]
-            else:
-                # For level 2+ skill proficiencies (just a list), no choices are given
-                return (0, self.skillProf[level])
-        return (0, [])
-
-    def getSavingThrowProf(self):
-        return self.savingThrowProf
+        
+    #@ EVENTUALLY I SHOULD BE TURNING THESE STRINGS INTO DIRECT CALLS TO OBJECTS
     
-    def getLevelFeatures(self, level):
-        return self.levelFeatures.get(level, [])
+
+# Just gotta populate the rest of the classes and we're good to push a commit! Screw it, I at least got the structure finalized, that's worth a commit

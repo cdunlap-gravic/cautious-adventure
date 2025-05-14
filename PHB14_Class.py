@@ -1,4 +1,10 @@
+# STANDARD IMPORTS FOR CLASS SETS
 from newClass import Class, registered, sourcebook
+from SpellSlotTree import FullCastTree, HalfCastTree, PactCastTree
+
+# RULEBOOK SPECIFIC IMPORTS
+from PHB14_EquipmentSets import *
+
 
 @registered
 @sourcebook("PHB'14")
@@ -6,33 +12,34 @@ class Fighter(Class):
     def __init__(self):
         super().__init__(
             name="Fighter",
-            hitDice="d10",
+            hitDie=10, # d10
             savingThrowProf=[
-                "STR", 
+                "STR",
                 "CON"
             ],
             skillProf={
-                1: (2, [
-                    "Athletics", 
-                    "Acrobatics", 
-                    "Animal Handling", 
-                    "History", 
-                    "Insight", 
-                    "Intimidation", 
-                    "Perception", 
-                    "Survival"
-                    ]),
                 2: [
-                    "Athletics", 
-                    "Acrobatics", 
-                    "Animal Handling", 
-                    "History", 
-                    "Insight", 
-                    "Intimidation", 
-                    "Perception", 
+                    "Acrobatics",
+                    "Animal Handling",
+                    "Athletics",
+                    "History",
+                    "Insight",
+                    "Intimidation",
+                    "Perception",
                     "Survival"
                 ]
             },
+            weaponProf=[
+                "Simple Weapons",
+                "Martial Weapons"
+            ],
+            armorProf=[
+                "Light Armor", # this line should look more like Equipment.Armours.tag["light"] These tags will only be a placeholder for now.
+                "Medium Armor",
+                "Heavy Armor",
+                "Shields"
+            ],
+            startingEquipment=FighterSet,
             levelFeatures={
                 1: ["Fighting Style", "Second Wind"],
                 2: ["Action Surge"],
@@ -55,7 +62,6 @@ class Fighter(Class):
                 19: ["ASI or Feat", "Martial Versatility (Optional)"],
                 20: ["Extra Attack"]
             }
-            
         )
 
 @registered
@@ -64,7 +70,7 @@ class Wizard(Class):
     def __init__(self):
         super().__init__(
             name="Wizard",
-            hitDice="d6",
+            hitDie=6,
             savingThrowProf=[
                 "INT", 
                 "WIS"
@@ -86,6 +92,15 @@ class Wizard(Class):
                     "Religion"
                 ]
             },
+            weaponProf=[
+                "Daggers",
+                "Darts",
+                "Slings",
+                "Quarterstaves",
+                "Light Crossbows"
+            ],
+            armorProf=[],
+            startingEquipment=WizardSet,
             levelFeatures={
                 1: ["Spellcasting", "Arcane Recovery"],
                 2: ["Arcane Tradition"],
@@ -100,5 +115,6 @@ class Wizard(Class):
                 18: ["Spell Mastery"],
                 19: ["ASI or Feat"],
                 20: ["Signature Spells"]
-            }
+            },
+            spellSlotTree=FullCastTree
         )

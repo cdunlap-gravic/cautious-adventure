@@ -3,3 +3,5 @@ I think I got as far as I could w/ Gemini's help. Let's start by reworking the s
 
 
 already rewrote race. Working on class now, next on the list is a rewrite on backgrounds, and then character.
+
+rewrote class, just need to populate out all of phb14's classes

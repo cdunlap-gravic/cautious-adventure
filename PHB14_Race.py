@@ -23,11 +23,7 @@ class Dragonborn(Race):
                 "Draconic"
             ],
             size="Medium",
-            speed=30,
-            flySpeed=0,
-            swimSpeed=0,
-            climbSpeed=0,
-            burrowSpeed=0
+            speed=30
         )
 
         
@@ -62,11 +58,7 @@ class Dwarf(Race):
                 "Dwarvish"
             ],
             size="Medium",
-            speed=25,
-            flySpeed=0,
-            swimSpeed=0,
-            climbSpeed=0,
-            burrowSpeed=0
+            speed=25
         )
    
         
@@ -112,11 +104,7 @@ class Elf(Race):
                 "Elvish"
             ],
             size="Medium",
-            speed=30,
-            flySpeed=0,
-            swimSpeed=0,
-            climbSpeed=0,
-            burrowSpeed=0
+            speed=30
         )
 
 
@@ -185,11 +173,7 @@ class Gnome(Race):
                 "Gnomish"
             ],
             size="Small",
-            speed=25,
-            flySpeed=0,
-            swimSpeed=0,
-            climbSpeed=0,
-            burrowSpeed=0
+            speed=25
         )
         
         
@@ -243,11 +227,7 @@ class Half_Elf(Race):
                 "Elvish"
             ],
             size="Medium",
-            speed=30,
-            flySpeed=0,
-            swimSpeed=0,
-            climbSpeed=0,
-            burrowSpeed=0
+            speed=30
         )
 
 
@@ -274,11 +254,7 @@ class Half_Orc(Race):
                 "Orc"
             ],
             size="Medium",
-            speed=30,
-            flySpeed=0,
-            swimSpeed=0,
-            climbSpeed=0,
-            burrowSpeed=0
+            speed=30
         )    
         
         
@@ -303,11 +279,7 @@ class Halfling(Race):
                 "Halfling"
             ],
             size="Small",
-            speed=25,
-            flySpeed=0,
-            swimSpeed=0,
-            climbSpeed=0,
-            burrowSpeed=0
+            speed=25
         )
 
 
@@ -355,11 +327,7 @@ class Human(Race):
                 "Common"
             ],
             size="Medium",
-            speed=30,
-            flySpeed=0,
-            swimSpeed=0,
-            climbSpeed=0,
-            burrowSpeed=0
+            speed=30
         )
 
 
@@ -383,11 +351,7 @@ class Human_Variant(Race):
                 "Common"
             ],
             size="Medium",
-            speed=30,
-            flySpeed=0,
-            swimSpeed=0,
-            climbSpeed=0,
-            burrowSpeed=0
+            speed=30
         )
 
 
@@ -413,9 +377,5 @@ class Tiefling(Race):
                 "Infernal"
             ],
             size="Medium",
-            speed=30,
-            flySpeed=0,
-            swimSpeed=0,
-            climbSpeed=0,
-            burrowSpeed=0
+            speed=30
         )
