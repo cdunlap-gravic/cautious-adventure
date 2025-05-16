@@ -1,7 +1,10 @@
 
 #@ This module is here just for the sake of readability of <rulebook>_Class.py. Nothing else. - Jeahnoh
-
-FighterSet = {
+BarbarianSet={}
+BardSet={}
+ClericSet={}
+DruidSet={}
+FighterSet={
           # I SHOULD CHECK IF THIS IS A STANDARD ARRAY OF OPTIONS, OR EVEN JUST ABSTRACT THIS TO a "FIGHTER'S SET OR GOLD" for ease of reading.
     1: [    # START WITH EQUIPMENT
             { 
@@ -42,8 +45,13 @@ FighterSet = {
     ]   
             
 }
-
-WizardSet = {      # I SHOULD CHECK IF THIS IS A STANDARD ARRAY OF OPTIONS, OR EVEN JUST ABSTRACT THIS TO a "FIGHTER'S SET OR GOLD" for ease of reading.
+MonkSet={}
+PaladinSet={}
+RangerSet={}
+RogueSet={}
+SorcererSet={}
+WarlockSet={}
+WizardSet={      # I SHOULD CHECK IF THIS IS A STANDARD ARRAY OF OPTIONS, OR EVEN JUST ABSTRACT THIS TO a "FIGHTER'S SET OR GOLD" for ease of reading.
     1: [    # START WITH EQUIPMENT
             [
                 { 
