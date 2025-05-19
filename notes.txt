@@ -5,3 +5,7 @@ I think I got as far as I could w/ Gemini's help. Let's start by reworking the s
 already rewrote race. Working on class now, next on the list is a rewrite on backgrounds, and then character.
 
 rewrote class, just need to populate out all of phb14's classes
+
+don't have to rewrite backgorunds at all. Just needed to abstract out rulebook listings and flesh out phb14 backgrounds
+
+I should probably consider an initialization test option, to verify that all packages are valid. Verify if the resources all have valid fields, and that creating a character across all permutations don't error out, and have valid stats.

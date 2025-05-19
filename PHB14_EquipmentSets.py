@@ -1,5 +1,6 @@
 
 #@ This module is here just for the sake of readability of <rulebook>_Class.py. Nothing else. - Jeahnoh
+#! Actually, not anymore. Need to utilize this for Background equipments too, and can utilize for lootsets
 BarbarianSet={}
 BardSet={}
 ClericSet={}
