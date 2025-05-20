@@ -1,6 +1,6 @@
 # STANDARD IMPORTS FOR CLASS SETS
 from Background import Background, registered, sourcebook
-
+from Skills import Skill
 
 #@
 #@ are features feats? or are they of the same ilk as class features?
@@ -15,8 +15,8 @@ class Acolyte(Background):
         super().__init__(
             name="Acolyte",
             skillProf=[
-                "Insight",
-                "Religion"
+                Skill.INSIGHT,
+                Skill.RELIGION
             ],
             toolProf=[],
             languages=["Pick 2 Languages"],
@@ -41,8 +41,8 @@ class Charlatan(Background):
         super().__init__(
             name="Charlatan",
             skillProf=[
-                "Deception",
-                "Slight of Hand"
+                Skill.DECEPTION,
+                Skill.SLEIGHT_OF_HAND
             ],
             toolProf=[
                 "Disguise Kit",
@@ -67,8 +67,8 @@ class Criminal(Background):
         super().__init__(
             name="Criminal",
             skillProf=[
-                "Deception",
-                "Stealth"
+                Skill.DECEPTION,
+                Skill.STEALTH
             ],
             toolProf=[
                 "Gaming set (five types), thieves' tools"
@@ -130,8 +130,8 @@ class Entertainer(Background):
         super().__init__(
             name="Entertainer",
             skillProf=[
-                "Acrobatics",
-                "Performance"
+                Skill.ACROBATICS,
+                Skill.PERFORMANCE
             ],
             toolProf=[
                 "Disguise Kit",
@@ -169,8 +169,8 @@ class FolkHero(Background):
         super().__init__(
             name="Folk Hero",
             skillProf=[
-                "Animal Handling",
-                "Survival"
+                Skill.ANIMAL_HANDLING,
+                Skill.SURVIVAL
             ],
             toolProf=[
                 "1 type Artisan's Tools",
@@ -197,8 +197,8 @@ class GuildArtisan(Background):
         super().__init__(
             name="Guild Artisan",
             skillProf=[
-                "Insight",
-                "Persuasion"
+                Skill.INSIGHT,
+                Skill.PERSUASION
             ],
             toolProf=["Choose 1 Artisan's Tools"],
             languages=["choose 1"],
@@ -235,8 +235,8 @@ class Hermit(Background):
         super().__init__(
             name="Hermit",
             skillProf=[
-                "Medicine",
-                "Religion"
+                Skill.MEDICINE,
+                Skill.RELIGION
             ],
             toolProf=["Herbalism Kit"],
             languages=["Choose 1 Language"],
@@ -258,8 +258,8 @@ class Noble(Background):
         super().__init__(
             name="Noble",
             skillProf=[
-                "History",
-                "Persuasion"
+                Skill.HISTORY,
+                Skill.PERSUASION
             ],
             toolProf=["Gaming set (one type)"],
             languages=["Choose 1 Language"],
@@ -305,8 +305,8 @@ class Outlander(Background):
         super().__init__(
             name="Outlander",
             skillProf=[
-                "Athletics",
-                "Survival"
+                Skill.ATHLETICS,
+                Skill.SURVIVAL
             ],
             toolProf=["Choose 1 Musical Instrument"],
             languages=["Choose 1 Language"],
@@ -330,8 +330,8 @@ class Sage(Background):
         super().__init__(
             name="Sage",
             skillProf=[
-                "Arcana",
-                "History"
+                Skill.ARCANA,
+                Skill.HISTORY
             ],
             toolProf=[],
             languages=["Choose 2 Languages"],
@@ -356,8 +356,8 @@ class Sailor(Background):
         super().__init__(
             name="Sailor",
             skillProf=[
-                "Athletics",
-                "Perception"
+                Skill.ATHLETICS,
+                Skill.PERCEPTION
             ],
             toolProf=[
                 "Navigator's Tools",
@@ -395,8 +395,8 @@ class Soldier(Background):
         super().__init__(
             name="Soldier",
             skillProf=[
-                "Athletics",
-                "Intimidation"
+                Skill.ATHLETICS,
+                Skill.INTIMIDATION
             ],
             toolProf=[
                 "One type of gaming Set",
@@ -423,8 +423,8 @@ class Urchin(Background):
         super().__init__(
             name="Urchin",
             skillProf=[
-                "Sleight of Hand",
-                "Stealth"
+                Skill.SLEIGHT_OF_HAND,
+                Skill.STEALTH
             ],
             toolProf=[
                 "Disguise Kit",

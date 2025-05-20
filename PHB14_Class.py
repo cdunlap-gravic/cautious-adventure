@@ -1,4 +1,7 @@
 # STANDARD IMPORTS FOR CLASS SETS
+from AbilityScore import AbilityScore
+from Skills import Skill
+
 from newClass import Class, registered, sourcebook
 from SpellSlotTree import FullCastTree, HalfCastTree, PactCastTree
 
@@ -16,17 +19,17 @@ class Barbarian(Class):
             name="Barbarian",
             hitDie=12,
             savingThrowProf=[
-                "STR",
-                "CON"
+                AbilityScore.STRENGTH,
+                AbilityScore.CONSTITUTION
             ],
             skillProf={
                 2: [
-                    "Animal Handling",
-                    "Athletics",
-                    "Intimidation",
-                    "Nature",
-                    "Perception",
-                    "Survival"
+                    Skill.ANIMAL_HANDLING,
+                    Skill.ATHLETICS,
+                    Skill.INTIMIDATION,
+                    Skill.NATURE,
+                    Skill.PERCEPTION,
+                    Skill.SURVIVAL
                 ]
             },
             weaponProf=[
@@ -71,29 +74,29 @@ class Bard(Class):
             name="Bard",
             hitDie=8,
             savingThrowProf=[
-                "DEX",
-                "CHA"
+                AbilityScore.DEXTERITY,
+                AbilityScore.CHARISMA
             ],
             skillProf={
                 3: [
-                    "Athletics",
-                    "Acrobatics",
-                    "Sleight of Hand",
-                    "Stealth",
-                    "Arcana",
-                    "History",
-                    "Investigation",
-                    "Nature",
-                    "Religion",
-                    "Animal Handling",
-                    "Insight",
-                    "Medicine",
-                    "Perception",
-                    "Survival",
-                    "Deception",
-                    "Intimidation",
-                    "Performance",
-                    "Persuasion"
+                    Skill.ATHLETICS,
+                    Skill.ACROBATICS,
+                    Skill.SLEIGHT_OF_HAND,
+                    Skill.STEALTH,
+                    Skill.ARCANA,
+                    Skill.HISTORY,
+                    Skill.INVESTIGATION,
+                    Skill.NATURE,
+                    Skill.RELIGION,
+                    Skill.ANIMAL_HANDLING,
+                    Skill.INSIGHT,
+                    Skill.MEDICINE,
+                    Skill.PERCEPTION,
+                    Skill.SURVIVAL,
+                    Skill.DECEPTION,
+                    Skill.INTIMIDATION,
+                    Skill.PERFORMANCE,
+                    Skill.PERSUASION
                 ]
             },
             weaponProf=[
@@ -186,16 +189,16 @@ class Cleric(Class):
             name="Cleric",
             hitDie=8,
             savingThrowProf=[
-                "WIS",
-                "CHA"
+                AbilityScore.WISDOM,
+                AbilityScore.CHARISMA
             ],
             skillProf={
                 2: [
-                    "History",
-                    "Insight",
-                    "Medicine",
-                    "Persuasion",
-                    "Religion" #COME ONNNNN why not pick this??? You're a cleric for godssake! (see what I did there? :P)
+                    Skill.HISTORY,
+                    Skill.INSIGHT,
+                    Skill.MEDICINE,
+                    Skill.PERSUASION,
+                    Skill.RELIGION #COME ONNNNN why not pick this??? You're a cleric for godssake! (see what I did there? :P)
                 ]
             },
             weaponProf=[
@@ -263,19 +266,19 @@ class Druid(Class):
             name="Druid",
             hitDie=8,
             savingThrowProf=[
-                "INT",
-                "WIS"
+                AbilityScore.INTELLIGENCE,
+                AbilityScore.WISDOM
             ],
             skillProf={
                 2: [
-                    "Arcana",
-                    "Animal Handling",
-                    "Insight",
-                    "Medicine",
-                    "Nature",
-                    "Perception",
-                    "Religion",
-                    "Survival"
+                    Skill.ARCANA,
+                    Skill.ANIMAL_HANDLING,
+                    Skill.INSIGHT,
+                    Skill.MEDICINE,
+                    Skill.NATURE,
+                    Skill.PERCEPTION,
+                    Skill.RELIGION,
+                    Skill.SURVIVAL
                 ]
             },
             weaponProf=[
@@ -353,19 +356,19 @@ class Fighter(Class):
             name="Fighter",
             hitDie=10, # d10
             savingThrowProf=[
-                "STR",
-                "CON"
+                AbilityScore.STRENGTH,
+                AbilityScore.CONSTITUTION
             ],
             skillProf={
                 2: [
-                    "Acrobatics",
-                    "Animal Handling",
-                    "Athletics",
-                    "History",
-                    "Insight",
-                    "Intimidation",
-                    "Perception",
-                    "Survival"
+                    Skill.ACROBATICS,
+                    Skill.ANIMAL_HANDLING,
+                    Skill.ATHLETICS,
+                    Skill.HISTORY,
+                    Skill.INSIGHT,
+                    Skill.INTIMIDATION,
+                    Skill.PERCEPTION,
+                    Skill.SURVIVAL
                 ]
             },
             weaponProf=[
@@ -413,17 +416,17 @@ class Monk(Class):
             name="Monk",
             hitDie=8,
             savingThrowProf=[
-                "STR",
-                "DEX"
+                AbilityScore.STRENGTH,
+                AbilityScore.DEXTERITY
             ],
             skillProf={
                 2: [
-                    "Acrobatics",
-                    "Athletics",
-                    "History",
-                    "Insight",
-                    "Religion",
-                    "Stealth"
+                    Skill.ACROBATICS,
+                    Skill.ATHLETICS,
+                    Skill.HISTORY,
+                    Skill.INSIGHT,
+                    Skill.RELIGION,
+                    Skill.STEALTH
                 ]
             },
             weaponProf=[
@@ -471,17 +474,17 @@ class Paladin(Class):
             name="Paladin",
             hitDie=10,
             savingThrowProf=[
-                "WIS",
-                "CHA"
+                AbilityScore.WISDOM,
+                AbilityScore.CHARISMA
             ],
             skillProf={
                 2: [
-                    "Athletics",
-                    "Insight",
-                    "Intimidation",
-                    "Medicine",
-                    "Persuasion",
-                    "Religion"
+                    Skill.ATHLETICS,
+                    Skill.INSIGHT,
+                    Skill.INTIMIDATION,
+                    Skill.MEDICINE,
+                    Skill.PERSUASION,
+                    Skill.RELIGION
                 ]
             },
             weaponProf=[
@@ -529,19 +532,19 @@ class Ranger(Class):
             name="Ranger",
             hitDie=10,
             savingThrowProf=[
-                "STR",
-                "DEX"
+                AbilityScore.STRENGTH,
+                AbilityScore.DEXTERITY
             ],
             skillProf={
                 3: [
-                    "Animal Handling",
-                    "Athletics",
-                    "Insight",
-                    "Investigation",
-                    "Nature",
-                    "Perception",
-                    "Stealth",
-                    "Survival"
+                    Skill.ANIMAL_HANDLING,
+                    Skill.ATHLETICS,
+                    Skill.INSIGHT,
+                    Skill.INVESTIGATION,
+                    Skill.NATURE,
+                    Skill.PERCEPTION,
+                    Skill.STEALTH,
+                    Skill.SURVIVAL
                 ]
             },
             weaponProf=[
@@ -611,22 +614,22 @@ class Rogue(Class):
             name="Rogue",
             hitDie=8,
             savingThrowProf=[
-                "DEX",
-                "INT"
+                AbilityScore.DEXTERITY,
+                AbilityScore.INTELLIGENCE
             ],
             skillProf={
                 4: [
-                    "Acrobatics",
-                    "Athletics",
-                    "Deception",
-                    "Insight",
-                    "Intimidation",
-                    "Investigation",
-                    "Perception",
-                    "Performance",
-                    "Persuasion",
-                    "Sleight of Hand",
-                    "Stealth"
+                    Skill.ACROBATICS,
+                    Skill.ATHLETICS,
+                    Skill.DECEPTION,
+                    Skill.INSIGHT,
+                    Skill.INTIMIDATION,
+                    Skill.INTIMIDATION,
+                    Skill.PERCEPTION,
+                    Skill.PERFORMANCE,
+                    Skill.PERSUASION,
+                    Skill.SLEIGHT_OF_HAND,
+                    Skill.STEALTH
                 ]
             },
             weaponProf=[
@@ -671,17 +674,17 @@ class Sorcerer(Class):
             name="Sorcerer",
             hitDie=6,
             savingThrowProf=[
-                "CON",
-                "CHA"
+                AbilityScore.CONSTITUTION,
+                AbilityScore.CHARISMA
             ],
             skillProf={
                 2: [
-                    "Arcana",
-                    "Deception",
-                    "Insight",
-                    "Intimidation",
-                    "Persuasion",
-                    "Religion"
+                    Skill.ARCANA,
+                    Skill.DECEPTION,
+                    Skill.INSIGHT,
+                    Skill.INTIMIDATION,
+                    Skill.PERSUASION,
+                    Skill.RELIGION
                 ]
             },
             weaponProf=[
@@ -772,18 +775,18 @@ class Warlock(Class):
             name="Warlock",
             hitDie=8,
             savingThrowProf=[
-                "WIS",
-                "CHA"
+                AbilityScore.WISDOM,
+                AbilityScore.CHARISMA
             ],
             skillProf={
                 2: [
-                    "Arcana",
-                    "Deception",
-                    "History",
-                    "Intimidation",
-                    "Investigation",
-                    "Nature",
-                    "Religion"
+                    Skill.ARCANA,
+                    Skill.DECEPTION,
+                    Skill.HISTORY,
+                    Skill.INTIMIDATION,
+                    Skill.INVESTIGATION,
+                    Skill.NATURE,
+                    Skill.RELIGION
                 ]
             },
             weaponProf=["Simple Weapons"],
@@ -867,17 +870,17 @@ class Wizard(Class):
             name="Wizard",
             hitDie=6,
             savingThrowProf=[
-                "INT", 
-                "WIS"
+                AbilityScore.INTELLIGENCE, 
+                AbilityScore.WISDOM
             ],
             skillProf={
                 2: [
-                    "Arcana", 
-                    "History", 
-                    "Insight", 
-                    "Investigation", 
-                    "Medicine", 
-                    "Religion"
+                    Skill.ARCANA, 
+                    Skill.HISTORY, 
+                    Skill.INSIGHT, 
+                    Skill.INVESTIGATION, 
+                    Skill.MEDICINE, 
+                    Skill.RELIGION
                 ]
             },
             toolProf=[],
