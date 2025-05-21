@@ -1,6 +1,6 @@
 # STANDARD IMPORTS FOR CLASS SETS
 from core.Background import Background, registered, sourcebook
-from core.enums import Skill
+from core.types import Skill
 
 #@
 #@ are features feats? or are they of the same ilk as class features?

@@ -1,4 +1,4 @@
-from core.enums import AbilityScore, Size
+from core.types import AbilityScore, Size, FlexConfig
 from core.Race import Race, registered, sourcebook
 
 @registered
@@ -9,8 +9,8 @@ class Dragonborn(Race):
             name="Dragonborn",
             creatureType="Humanoid", #TODO ABSTRACT TO ENUM
             abilityBonuses={
-                AbilityScore.STRENGTH.value: 2,
-                AbilityScore.CHARISMA.value: 1
+                AbilityScore.STRENGTH: 2,
+                AbilityScore.CHARISMA: 1
             },
             racialTraits=[
                 "Draconic Ancestry",
@@ -35,7 +35,7 @@ class Dwarf(Race):
             name="Dwarf",
             creatureType="Humanoid",
             abilityBonuses={
-                AbilityScore.CONSTITUTION.value: 2
+                AbilityScore.CONSTITUTION: 2
             },
             racialTraits=[
                 "Dwarven Speed",
@@ -68,7 +68,7 @@ class Dwarf_Hill(Dwarf):
     def __init__(self):
         super().__init__()
         self.name="Hill Dwarf"
-        self.abilityBonuses[AbilityScore.WISDOM.value]=1
+        self.abilityBonuses[AbilityScore.WISDOM]=1
         self.racialTraits.append("Dwarven Toughness")
      
         
@@ -78,7 +78,7 @@ class Dwarf_Mountain(Dwarf):
     def __init__(self):
         super().__init__()
         self.name="Mountain Dwarf"
-        self.abilityBonuses[AbilityScore.STRENGTH.value]=2
+        self.abilityBonuses[AbilityScore.STRENGTH]=2
         self.racialTraits.append("Dwarven Armor Training")
         
         
@@ -90,7 +90,7 @@ class Elf(Race):
             name="Elf",
             creatureType="Humanoid",
             abilityBonuses={
-                AbilityScore.DEXTERITY.value: 2
+                AbilityScore.DEXTERITY: 2
             },
             racialTraits=[
                 "Darkvision",
@@ -114,7 +114,7 @@ class Elf_Drow(Elf):
     def __init__(self):
         super().__init__()
         self.name="Drow Elf"
-        self.abilityBonuses[AbilityScore.CHARISMA.value]=1
+        self.abilityBonuses[AbilityScore.CHARISMA]=1
         self.racialTraits.remove("Darkvision")
         self.racialTraits.extend([
             "Superior Darkvision",
@@ -130,7 +130,7 @@ class Elf_High(Elf):
     def __init__(self):
         super().__init__()
         self.name="High Elf"
-        self.abilityBonuses[AbilityScore.INTELLIGENCE.value]=1
+        self.abilityBonuses[AbilityScore.INTELLIGENCE]=1
         self.racialTraits.extend([
             "Elf Weapon Training",
             "Wizard Cantrip",
@@ -144,7 +144,7 @@ class Elf_Wood(Elf):
     def __init__(self):
         super().__init__()
         self.name="Wood Elf"
-        self.abilityBonuses[AbilityScore.WISDOM.value]=1
+        self.abilityBonuses[AbilityScore.WISDOM]=1
         self.racialTraits.extend([
             "Elf Weapon Training",
             "Fleet of Foot",
@@ -161,7 +161,7 @@ class Gnome(Race):
             name="Gnome",
             creatureType="Humanoid",
             abilityBonuses={
-                AbilityScore.INTELLIGENCE.value: 2
+                AbilityScore.INTELLIGENCE: 2
             },
             racialTraits=[
                 "Darkvision",
@@ -183,7 +183,7 @@ class Gnome_Forest(Gnome):
     def __init__(self):
         super().__init__()
         self.name="Forest Gnome"
-        self.abilityBonuses[AbilityScore.DEXTERITY.value]=1
+        self.abilityBonuses[AbilityScore.DEXTERITY]=1
         self.racialTraits.extend([
             "Natural Illusionists",
             "Speak with Small Beasts"
@@ -196,16 +196,14 @@ class Gnome_Rock(Gnome):
     def __init__(self):
         super().__init__()
         self.name="Rock Gnome"
-        self.abilityBonuses[AbilityScore.CONSTITUTION.value]=1
+        self.abilityBonuses[AbilityScore.CONSTITUTION]=1
         self.toolProf.append("Tinker's Tools")
         self.racialTraits.extend([
             "Artificer's Lore",
             "Tinker"
         ])
         
-#######################################################################################
-#! HOW TO FIX UNIQUE ABI???
-#######################################################################################
+
 @registered
 @sourcebook("PHB'14")
 class Half_Elf(Race):
@@ -214,8 +212,12 @@ class Half_Elf(Race):
             name="Half-Elf",
             creatureType="Humanoid",
             abilityBonuses={
-                AbilityScore.CHARISMA.value: 2,
-                "UNIQUE_ABI": 2 # IMPLIES UNIQUE TO EACHOTHER, AND UNIQUE TO CHARISMA. #! ??? HOW TO DO THIS?
+                AbilityScore.CHARISMA: 2,
+                AbilityScore.FLEX: FlexConfig(
+                    count=2,
+                    value=1,
+                    exclude=[AbilityScore.CHARISMA]
+                )
             },
             racialTraits=[
                 "Darkvision",
@@ -241,8 +243,8 @@ class Half_Orc(Race):
             name="Half-Orc",
             creatureType="Humanoid",
             abilityBonuses={
-                AbilityScore.STRENGTH.value: 2,
-                AbilityScore.CONSTITUTION.value: 1
+                AbilityScore.STRENGTH: 2,
+                AbilityScore.CONSTITUTION: 1
             },
             racialTraits=[
                 "Darkvision",
@@ -268,7 +270,7 @@ class Halfling(Race):
             name="Halfling",
             creatureType="Humanoid",
             abilityBonuses={
-                AbilityScore.DEXTERITY.value: 2
+                AbilityScore.DEXTERITY: 2
             },
             racialTraits=[
                 "Lucky",
@@ -291,7 +293,7 @@ class Halfling_Lightfoot(Halfling):
     def __init__(self):
         super().__init__()
         self.name = "Lightfoot Halfling"
-        self.abilityBonuses[AbilityScore.CHARISMA.value]= 1
+        self.abilityBonuses[AbilityScore.CHARISMA]= 1
         self.racialTraits.append("Naturally Stealthy")
 
 
@@ -301,7 +303,7 @@ class Halfling_Stout(Halfling):
     def __init__(self):
         super().__init__()
         self.name = "Stout Halfling"
-        self.abilityBonuses[AbilityScore.CONSTITUTION.value]= 1
+        self.abilityBonuses[AbilityScore.CONSTITUTION]= 1
         self.racialTraits.append("Stout Resilience")
 
 
@@ -314,12 +316,12 @@ class Human(Race):
             name="Human",
             creatureType="Humanoid",
             abilityBonuses={
-                AbilityScore.STRENGTH.value: 1,
-                AbilityScore.DEXTERITY.value: 1,
-                AbilityScore.CONSTITUTION.value: 1,
-                AbilityScore.INTELLIGENCE.value: 1,
-                AbilityScore.WISDOM.value: 1,
-                AbilityScore.CHARISMA.value: 1
+                AbilityScore.STRENGTH: 1,
+                AbilityScore.DEXTERITY: 1,
+                AbilityScore.CONSTITUTION: 1,
+                AbilityScore.INTELLIGENCE: 1,
+                AbilityScore.WISDOM: 1,
+                AbilityScore.CHARISMA: 1
             },
             racialTraits=[
                 "Extra Language"
@@ -331,9 +333,7 @@ class Human(Race):
             size=Size.MEDIUM,
             speed=30
         )
-#######################################################################################
-#! HOW TO FIX UNIQUE ABI???
-#######################################################################################
+
 @registered
 @sourcebook("PHB'14")
 class Human_Variant(Race):
@@ -342,7 +342,7 @@ class Human_Variant(Race):
             name="Human (Varient)",
             creatureType="Humanoid",
             abilityBonuses={
-                "UNIQUE_ABI": 2 # +1 TO TWO ABIs #! AGAIN, HOW TO DO THIS CLEANLY?
+                AbilityScore.FLEX: FlexConfig(count=2,value=1)
             },
             racialTraits=[
                 "Extra Language",
@@ -366,8 +366,8 @@ class Tiefling(Race):
             name="Tiefling",
             creatureType="Humanoid",
             abilityBonuses={
-                AbilityScore.CHARISMA.value: 2,
-                AbilityScore.INTELLIGENCE.value: 1
+                AbilityScore.CHARISMA: 2,
+                AbilityScore.INTELLIGENCE: 1
             },
             racialTraits=[
                 "Darkvision",

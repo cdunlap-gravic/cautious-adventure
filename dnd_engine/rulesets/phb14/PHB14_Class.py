@@ -1,5 +1,5 @@
 # STANDARD IMPORTS FOR CLASS SETS
-from core.enums import AbilityScore, Skill
+from core.types import AbilityScore, Skill
 
 from core.Class import Class, registered, sourcebook
 from core.SpellSlotTree import FullCastTree, HalfCastTree, PactCastTree

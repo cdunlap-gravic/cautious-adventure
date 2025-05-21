@@ -1,6 +1,6 @@
-# PLACEHOLDER. MOVE ALL ENUMS IN HERE
 from enum import Enum
-
+from dataclasses import dataclass, field
+from typing import List
 class AbilityScore(Enum):
     """
     Represents the six core ability scores in D&D 5th Edition,
@@ -13,9 +13,10 @@ class AbilityScore(Enum):
     INTELLIGENCE = ("INT", "Measures mental acuity, accuracy of recall, and the ability to reason.")
     WISDOM = ("WIS", "Measures how attuned you are to the world around you and represents perceptiveness and intuition.")
     CHARISMA = ("CHA", "Measures your ability to interact effectively with others through confidence, eloquence, or a commanding presence.")
-
-    def __init__(self, shortName, description):
-        self._value_ = shortName
+    FLEX = ("FLEX", "Please choose an ability score to increase by 1.")
+    
+    def __init__(self, value, description):
+        self._value_ = value
         self.description = description
 
     def __str__(self):
@@ -86,3 +87,10 @@ class Skill(Enum):
     @property
     def relatedAbilityShort(self) -> str:
         return self.abilityScore.value
+
+
+@dataclass(frozen=True)
+class FlexConfig:
+    count: int = 1
+    value: int = 1
+    exclude: list[AbilityScore] = field(default_factory=list)
