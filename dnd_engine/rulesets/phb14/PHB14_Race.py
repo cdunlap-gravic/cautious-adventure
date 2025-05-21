@@ -1,6 +1,7 @@
 from core.types import AbilityScore, Size, FlexConfig
 from core.Race import Race, registered, sourcebook
 
+from PHB14_Types import PHB14_Languages
 @registered
 @sourcebook("PHB'14")
 class Dragonborn(Race):
@@ -18,9 +19,9 @@ class Dragonborn(Race):
                 "Damage Resistance"
             ],
             toolProf=[],
-            languages=[ #TODO ABSTRACT TO ENUM
-                "Common",
-                "Draconic"
+            languages=[
+                PHB14_Languages.COMMON,
+                PHB14_Languages.DRACONIC
             ],
             size=Size.MEDIUM,
             speed=30
@@ -54,8 +55,8 @@ class Dwarf(Race):
                 )
             },
             languages=[
-                "Common",
-                "Dwarvish"
+                PHB14_Languages.COMMON,
+                PHB14_Languages.DWARVISH
             ],
             size=Size.MEDIUM,
             speed=25
@@ -100,8 +101,8 @@ class Elf(Race):
             ],
             toolProf=[],
             languages=[
-                "Common",
-                "Elvish"
+                PHB14_Languages.COMMON,
+                PHB14_Languages.ELVISH
             ],
             size=Size.MEDIUM,
             speed=30
@@ -169,8 +170,8 @@ class Gnome(Race):
             ],
             toolProf={},
             languages=[
-                "Common",
-                "Gnomish"
+                PHB14_Languages.COMMON,
+                PHB14_Languages.GNOMISH
             ],
             size=Size.SMALL,
             speed=25
@@ -227,8 +228,8 @@ class Half_Elf(Race):
             ],
             toolProf=[],
             languages=[
-                "Common",
-                "Elvish"
+                PHB14_Languages.COMMON,
+                PHB14_Languages.ELVISH
             ],
             size=Size.MEDIUM,
             speed=30
@@ -254,8 +255,8 @@ class Half_Orc(Race):
             ],
             toolProf=[],
             languages=[
-                "Common",
-                "Orc"
+                PHB14_Languages.COMMON,
+                PHB14_Languages.ORC
             ],
             size=Size.MEDIUM,
             speed=30
@@ -279,8 +280,8 @@ class Halfling(Race):
             ],
             toolProf=[],
             languages=[
-                "Common",
-                "Halfling"
+                PHB14_Languages.COMMON,
+                PHB14_Languages.HALFLING
             ],
             size=Size.SMALL,
             speed=25
@@ -328,7 +329,7 @@ class Human(Race):
             ],
             toolProf=[],
             languages=[
-                "Common"
+                PHB14_Languages.COMMON
             ],
             size=Size.MEDIUM,
             speed=30
@@ -351,7 +352,7 @@ class Human_Variant(Race):
             ],
             toolProf=[],
             languages=[
-                "Common"
+                PHB14_Languages.COMMON
             ],
             size=Size.MEDIUM,
             speed=30
@@ -376,8 +377,8 @@ class Tiefling(Race):
             ],
             toolProf=[],
             languages=[
-                "Common",
-                "Infernal"
+                PHB14_Languages.COMMON,
+                PHB14_Languages.INFERNAL
             ],
             size=Size.MEDIUM,
             speed=30
