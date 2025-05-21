@@ -1,6 +1,6 @@
-from AbilityScore import AbilityScore
-from Size import Size
-from newRace import Race, registered, sourcebook
+from core.AbilityScore import AbilityScore
+from core.Size import Size
+from core.Race import Race, registered, sourcebook
 
 @registered
 @sourcebook("PHB'14")

@@ -1,9 +1,9 @@
 # STANDARD IMPORTS FOR CLASS SETS
-from AbilityScore import AbilityScore
-from Skills import Skill
+from core.AbilityScore import AbilityScore
+from core.Skills import Skill
 
-from newClass import Class, registered, sourcebook
-from SpellSlotTree import FullCastTree, HalfCastTree, PactCastTree
+from core.Class import Class, registered, sourcebook
+from core.SpellSlotTree import FullCastTree, HalfCastTree, PactCastTree
 
 # RULEBOOK SPECIFIC IMPORTS
 from PHB14_EquipmentSets import *
