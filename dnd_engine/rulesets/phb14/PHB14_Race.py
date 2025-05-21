@@ -1,5 +1,4 @@
-from core.AbilityScore import AbilityScore
-from core.Size import Size
+from core.enums import AbilityScore, Size
 from core.Race import Race, registered, sourcebook
 
 @registered
