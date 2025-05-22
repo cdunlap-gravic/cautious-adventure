@@ -1,6 +1,6 @@
 # STANDARD IMPORTS FOR CLASS SETS
 from core.Background import Background, registered, sourcebook
-from core.types import Skill
+from core.types import Skill, Sourcebooks
 
 #@
 #@ are features feats? or are they of the same ilk as class features?
@@ -9,7 +9,7 @@ from core.types import Skill
 
 #Acolyte
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Acolyte(Background):
     def __init__(self):
         super().__init__(
@@ -35,7 +35,7 @@ class Acolyte(Background):
 
 #Charlatan
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Charlatan(Background):
     def __init__(self):
         super().__init__(
@@ -61,7 +61,7 @@ class Charlatan(Background):
 
 #Criminal
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Criminal(Background):
     def __init__(self):
         super().__init__(
@@ -87,7 +87,7 @@ class Criminal(Background):
         
 #Criminal (Spy)
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Criminal_Spy(Criminal):
     def __init__(self):
         super().__init__()
@@ -98,7 +98,7 @@ class Criminal_Spy(Criminal):
 #Custom Background
 #! This one is very special and will probably be more difficult to configure until the whole system is finalized
 #@registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Custom(Background):
     def __init__(self):
         super().__init__(
@@ -124,7 +124,7 @@ class Custom(Background):
         
 #Entertainer
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Entertainer(Background):
     def __init__(self):
         super().__init__(
@@ -152,7 +152,7 @@ class Entertainer(Background):
         
 #Entertainer (Gladiator)
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Entertainer_Gladiator(Entertainer):
     def __init__(self):
         super().__init__()
@@ -163,7 +163,7 @@ class Entertainer_Gladiator(Entertainer):
         
 #Folk Hero
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class FolkHero(Background):
     def __init__(self):
         super().__init__(
@@ -191,7 +191,7 @@ class FolkHero(Background):
         
 #Guild Artisan
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class GuildArtisan(Background):
     def __init__(self):
         super().__init__(
@@ -215,7 +215,7 @@ class GuildArtisan(Background):
         
 #Guild Artisan (Guild Merchant)
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class GuildArtisan_Merchant(GuildArtisan):
     def __init__(self):
         super().__init__()
@@ -229,7 +229,7 @@ class GuildArtisan_Merchant(GuildArtisan):
         
 #Hermit
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Hermit(Background):
     def __init__(self):
         super().__init__(
@@ -252,7 +252,7 @@ class Hermit(Background):
         
 #Noble
 @registered      
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Noble(Background):
     def __init__(self):
         super().__init__(
@@ -276,7 +276,7 @@ class Noble(Background):
         
 #Noble (Knight)
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Noble_Knight(Noble):
     def __init__(self):
         super().__init__()
@@ -288,7 +288,7 @@ class Noble_Knight(Noble):
         
 #Noble (Retainers)
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Noble_Retainers(Noble):
     def __init__(self):
         super().__init__()
@@ -299,7 +299,7 @@ class Noble_Retainers(Noble):
         
 #Outlander
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Outlander(Background):
     def __init__(self):
         super().__init__(
@@ -324,7 +324,7 @@ class Outlander(Background):
         
 #Sage
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Sage(Background):
     def __init__(self):
         super().__init__(
@@ -350,7 +350,7 @@ class Sage(Background):
         
 #Sailor
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Sailor(Background):
     def __init__(self):
         super().__init__(
@@ -378,7 +378,7 @@ class Sailor(Background):
         
 #Sailor (Pirate)
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Sailor_Pirate(Sailor):
     def __init__(self):
         super().__init__()
@@ -389,7 +389,7 @@ class Sailor_Pirate(Sailor):
         
 #Soldier
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Soldier(Background):
     def __init__(self):
         super().__init__(
@@ -417,7 +417,7 @@ class Soldier(Background):
         
 #Urchin
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Urchin(Background):
     def __init__(self):
         super().__init__(

@@ -1,9 +1,9 @@
-from core.types import AbilityScore, Size, FlexConfig
+from core.types import AbilityScore, Size, FlexConfig, Sourcebooks
 from core.Race import Race, registered, sourcebook
 
 from PHB14_Types import PHB14_Languages
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Dragonborn(Race):
     def __init__(self):
         super().__init__(
@@ -29,7 +29,7 @@ class Dragonborn(Race):
 
         
 @registered
-@sourcebook("PHB'14") 
+@sourcebook(Sourcebooks.PHB14)
 class Dwarf(Race):
     def __init__(self):
         super().__init__(
@@ -64,7 +64,7 @@ class Dwarf(Race):
    
         
 @registered
-@sourcebook("PHB'14") 
+@sourcebook(Sourcebooks.PHB14)
 class Dwarf_Hill(Dwarf):
     def __init__(self):
         super().__init__()
@@ -74,7 +74,7 @@ class Dwarf_Hill(Dwarf):
      
         
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Dwarf_Mountain(Dwarf):
     def __init__(self):
         super().__init__()
@@ -84,7 +84,7 @@ class Dwarf_Mountain(Dwarf):
         
         
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Elf(Race):
     def __init__(self):
         super().__init__(
@@ -110,7 +110,7 @@ class Elf(Race):
 
 
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Elf_Drow(Elf):
     def __init__(self):
         super().__init__()
@@ -126,7 +126,7 @@ class Elf_Drow(Elf):
 
 
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Elf_High(Elf):
     def __init__(self):
         super().__init__()
@@ -140,7 +140,7 @@ class Elf_High(Elf):
         
         
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Elf_Wood(Elf):
     def __init__(self):
         super().__init__()
@@ -155,7 +155,7 @@ class Elf_Wood(Elf):
         
         
 @registered
-@sourcebook("PHB'14")        
+@sourcebook(Sourcebooks.PHB14)      
 class Gnome(Race):
     def __init__(self):
         super().__init__(
@@ -179,7 +179,7 @@ class Gnome(Race):
         
         
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Gnome_Forest(Gnome):
     def __init__(self):
         super().__init__()
@@ -192,7 +192,7 @@ class Gnome_Forest(Gnome):
 
 
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Gnome_Rock(Gnome):
     def __init__(self):
         super().__init__()
@@ -206,7 +206,7 @@ class Gnome_Rock(Gnome):
         
 
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Half_Elf(Race):
     def __init__(self):
         super().__init__(
@@ -237,7 +237,7 @@ class Half_Elf(Race):
 
 
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Half_Orc(Race):
     def __init__(self):
         super().__init__(
@@ -264,7 +264,7 @@ class Half_Orc(Race):
         
         
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Halfling(Race):
     def __init__(self):
         super().__init__(
@@ -289,7 +289,7 @@ class Halfling(Race):
 
 
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Halfling_Lightfoot(Halfling):
     def __init__(self):
         super().__init__()
@@ -299,7 +299,7 @@ class Halfling_Lightfoot(Halfling):
 
 
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Halfling_Stout(Halfling):
     def __init__(self):
         super().__init__()
@@ -310,7 +310,7 @@ class Halfling_Stout(Halfling):
 
 
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Human(Race):
     def __init__(self):
         super().__init__(
@@ -336,7 +336,7 @@ class Human(Race):
         )
 
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Human_Variant(Race):
     def __init__(self):
         super().__init__(
@@ -360,7 +360,7 @@ class Human_Variant(Race):
 
 
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Tiefling(Race):
     def __init__(self):
         super().__init__(

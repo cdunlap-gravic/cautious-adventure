@@ -1,5 +1,5 @@
 # STANDARD IMPORTS FOR CLASS SETS
-from core.types import AbilityScore, Skill
+from core.types import AbilityScore, Skill, Sourcebooks
 
 from core.Class import Class, registered, sourcebook
 from core.SpellSlotTree import FullCastTree, HalfCastTree, PactCastTree
@@ -11,7 +11,7 @@ from PHB14_EquipmentSets import *
 #? So how do we want to handle extras like rage count, or rage damage? Extra table?
 #? And how do we handle multiclass requirements? Lets at least populate out the rest first...
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Barbarian(Class):
     def __init__(self):
         super().__init__(
@@ -66,7 +66,7 @@ class Barbarian(Class):
             }
         )
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Bard(Class):
     def __init__(self):
         super().__init__(
@@ -181,7 +181,7 @@ class Bard(Class):
         
         
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Cleric(Class):
     def __init__(self):
         super().__init__(
@@ -258,7 +258,7 @@ class Cleric(Class):
         )
 
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Druid(Class):
     def __init__(self):
         super().__init__(
@@ -348,7 +348,7 @@ class Druid(Class):
         )
       
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Fighter(Class):
     def __init__(self):
         super().__init__(
@@ -408,7 +408,7 @@ class Fighter(Class):
 
 
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Monk(Class):
     def __init__(self):
         super().__init__(
@@ -466,7 +466,7 @@ class Monk(Class):
         )
 
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Paladin(Class):
     def __init__(self):
         super().__init__(
@@ -524,7 +524,7 @@ class Paladin(Class):
         )
         
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Ranger(Class):
     def __init__(self):
         super().__init__(
@@ -606,7 +606,7 @@ class Ranger(Class):
 
 
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Rogue(Class):
     def __init__(self):
         super().__init__(
@@ -666,7 +666,7 @@ class Rogue(Class):
         )
 
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Sorcerer(Class):
     def __init__(self):
         super().__init__(
@@ -767,7 +767,7 @@ class Sorcerer(Class):
         
 
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Warlock(Class):
     def __init__(self):
         super().__init__(
@@ -862,7 +862,7 @@ class Warlock(Class):
         )
 
 @registered
-@sourcebook("PHB'14")
+@sourcebook(Sourcebooks.PHB14)
 class Wizard(Class):
     def __init__(self):
         super().__init__(
