@@ -93,4 +93,4 @@ class Skill(Enum):
 class FlexConfig:
     count: int = 1
     value: int = 1
-    exclude: list[AbilityScore] = field(default_factory=list)
+    exclude: List[AbilityScore] = field(default_factory=list)
