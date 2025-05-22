@@ -33,47 +33,4 @@ class Race:
         self.burrowSpeed = burrowSpeed
             
 
-########### PROTOS ##############
-
-
-#@registered
-@sourcebook("")
-class NEW_RACE_NAME(Race):
-    def __init__(self):
-        super().__init__(
-            name="",
-            creatureType="Humanoid",
-            abilityBonuses={
-                "": 0,
-                "": 0
-            },
-            racialTraits=[
-                "",
-                "",
-                ""
-            ],
-            toolProf=[],
-            languages=[
-                "Common",
-                ""
-            ],
-            size="Medium",
-            speed=25,
-            flySpeed=0,
-            swimSpeed=0,
-            climbSpeed=0,
-            burrowSpeed=0
-        )
-
-
-#@registered
-@sourcebook("")
-class NEW_RACE_NAME_SUBRACE(NEW_RACE_NAME):
-    def __init__(self):
-        super().__init__()
-        self.name = ""
-        self.abilityBonuses.update({})
-        self.racialTraits.extend([])
-        # Modify other attributes if needed
-        
         
