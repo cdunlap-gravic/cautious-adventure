@@ -1,4 +1,4 @@
-from core.types import AbilityScore, Size, FlexConfig, Sourcebooks
+from core.types import AbilityScore, CreatureType, Size, FlexConfig, Sourcebooks
 from core.Race import Race, registered, sourcebook
 
 from PHB14_Types import PHB14_Languages
@@ -8,7 +8,7 @@ class Dragonborn(Race):
     def __init__(self):
         super().__init__(
             name="Dragonborn",
-            creatureType="Humanoid", #TODO ABSTRACT TO ENUM
+            creatureType=CreatureType.HUMANOID,
             abilityBonuses={
                 AbilityScore.STRENGTH: 2,
                 AbilityScore.CHARISMA: 1
@@ -34,7 +34,7 @@ class Dwarf(Race):
     def __init__(self):
         super().__init__(
             name="Dwarf",
-            creatureType="Humanoid",
+            creatureType=CreatureType.HUMANOID,
             abilityBonuses={
                 AbilityScore.CONSTITUTION: 2
             },
@@ -89,7 +89,7 @@ class Elf(Race):
     def __init__(self):
         super().__init__(
             name="Elf",
-            creatureType="Humanoid",
+            creatureType=CreatureType.HUMANOID,
             abilityBonuses={
                 AbilityScore.DEXTERITY: 2
             },
@@ -160,7 +160,7 @@ class Gnome(Race):
     def __init__(self):
         super().__init__(
             name="Gnome",
-            creatureType="Humanoid",
+            creatureType=CreatureType.HUMANOID,
             abilityBonuses={
                 AbilityScore.INTELLIGENCE: 2
             },
@@ -211,7 +211,7 @@ class Half_Elf(Race):
     def __init__(self):
         super().__init__(
             name="Half-Elf",
-            creatureType="Humanoid",
+            creatureType=CreatureType.HUMANOID,
             abilityBonuses={
                 AbilityScore.CHARISMA: 2,
                 AbilityScore.FLEX: FlexConfig(
@@ -242,7 +242,7 @@ class Half_Orc(Race):
     def __init__(self):
         super().__init__(
             name="Half-Orc",
-            creatureType="Humanoid",
+            creatureType=CreatureType.HUMANOID,
             abilityBonuses={
                 AbilityScore.STRENGTH: 2,
                 AbilityScore.CONSTITUTION: 1
@@ -269,7 +269,7 @@ class Halfling(Race):
     def __init__(self):
         super().__init__(
             name="Halfling",
-            creatureType="Humanoid",
+            creatureType=CreatureType.HUMANOID,
             abilityBonuses={
                 AbilityScore.DEXTERITY: 2
             },
@@ -315,7 +315,7 @@ class Human(Race):
     def __init__(self):
         super().__init__(
             name="Human",
-            creatureType="Humanoid",
+            creatureType=CreatureType.HUMANOID,
             abilityBonuses={
                 AbilityScore.STRENGTH: 1,
                 AbilityScore.DEXTERITY: 1,
@@ -341,7 +341,7 @@ class Human_Variant(Race):
     def __init__(self):
         super().__init__(
             name="Human (Varient)",
-            creatureType="Humanoid",
+            creatureType=CreatureType.HUMANOID,
             abilityBonuses={
                 AbilityScore.FLEX: FlexConfig(count=2,value=1)
             },
@@ -365,7 +365,7 @@ class Tiefling(Race):
     def __init__(self):
         super().__init__(
             name="Tiefling",
-            creatureType="Humanoid",
+            creatureType=CreatureType.HUMANOID,
             abilityBonuses={
                 AbilityScore.CHARISMA: 2,
                 AbilityScore.INTELLIGENCE: 1

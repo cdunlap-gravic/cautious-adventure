@@ -10,4 +10,8 @@ don't have to rewrite backgorunds at all. Just needed to abstract out rulebook l
 
 I should probably consider an initialization test option, to verify that all packages are valid. Verify if the resources all have valid fields, and that creating a character across all permutations don't error out, and have valid stats.
 
-folders next
+folders next DONE
+
+DONT MAKE MORE RULEBOOKS UNTIL EVERYTHING IN PHB14 WORKS!!! I know the temptation is great, but you need to figure out how to program in the rest of racial and background traits and other core functionality before you can streamline adding races/classes/backgrounds etc.
+
+I need a creature category enum

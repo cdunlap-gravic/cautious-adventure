@@ -122,6 +122,21 @@ class AbilityScore(Enum):
     def fullDescription(self):
         return f"{self.name} ({self.value}): {self.description}"
 
+class CreatureType(Enum):
+    ABERRATION = ("Aberration")
+    BEAST = ("Beast")
+    CELESTIAL = ("Celestial")
+    CONSTRUCT = ("Construct")
+    DRAGON = ("Dragon")
+    ELEMENTAL = ("Elemental")
+    FEY = ("Fey")
+    FIEND = ("Fiend")
+    GIANT = ("Giant")
+    HUMANOID = ("Humanoid")
+    MONSTROSITY = ("Monstrosity")
+    OOZE = ("Ooze")
+    PLANT = ("Plant")
+    UNDEAD = ("Undead")
 
 
 class Size(Enum):
@@ -188,3 +203,5 @@ class FlexConfig:
     count: int = 1
     value: int = 1
     exclude: List[AbilityScore] = field(default_factory=list)
+    
+    
