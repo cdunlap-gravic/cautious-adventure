@@ -139,6 +139,22 @@ class CreatureType(Enum):
     UNDEAD = ("Undead")
 
 
+class DamageType(Enum):
+    ACID = ("Acid", "ACD", "The corrosive spray of a black dragon's breath and the dissolving enzymes secreted by a black pudding deal acid damage.")
+    BLUDGEONING = ("Bludgeoning", "BLD", "Blunt force attacks—hammers, falling, constriction, and the like—deal bludgeoning damage.")
+    COLD = ("Cold", "CLD", "The infernal chill radiating from an ice devil's spear and the frigid blast of a white dragon's breath deal cold damage.")
+    FIRE = ("Fire", "FIR", "Red dragons breathe fire, and many spells conjure flames to deal fire damage.")
+    FORCE = ("Force", "FRC", "Force is pure magical energy focused into a damaging form. Most effects that deal force damage are spells, including magic missile and spiritual weapon.")
+    LIGHTNING = ("Lightning", "LTN", "A lightning bolt spell and a blue dragon's breath deal lightning damage.")
+    NECROTIC = ("Necrotic", "NEC", "Necrotic damage, dealt by certain undead and some spells, withers matter and even the soul.")
+    PIERCING = ("Piercing", "PRC", "Puncturing and impaling attacks, including spears and monsters' bites, deal piercing damage.")
+    POISON = ("Poison", "PSN", "Venomous stings and the toxic gas of a green dragon's breath deal poison damage.")
+    PSYCHIC = ("Psychic", "PSY", "Mental abilities such as a mind flayer's psionic blast deal psychic damage.")
+    RADIANT = ("Radiant", "RDN", "Radiant damage, dealt by a cleric's flame strike spell or an angel's smiting weapon, sears the flesh like fire and overloads the spirit with power.")
+    SLASHING = ("Slashing", "SLS", "Swords, axes, and monsters' claws deal slashing damage.")
+    THUNDER = ("Thunder", "THN", "A concussive burst of sound, such as the effect of the thunderwave spell, deals thunder damage.")
+
+
 class Size(Enum):
     TINY = ("Tiny", 2.5)
     SMALL = ("Small", 5)
