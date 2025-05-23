@@ -1,4 +1,4 @@
-from core.types import AbilityScore, CreatureType, Size, FlexConfig, Sourcebooks
+from core.types import AbilityScore, CreatureType, Size, FlexConfig, Sourcebooks, RacialTrait
 from core.Race import Race, registered, sourcebook
 
 from PHB14_Types import PHB14_Languages
@@ -14,9 +14,9 @@ class Dragonborn(Race):
                 AbilityScore.CHARISMA: 1
             },
             racialTraits=[
-                "Draconic Ancestry",
-                "Breath Weapon",
-                "Damage Resistance"
+                RacialTrait.DRACONIC_ANCESTRY,
+                RacialTrait.DRACONIC_BREATH_WEAPON,
+                RacialTrait.DRACONIC_DAMAGE_RESISTANCE
             ],
             toolProf=[],
             languages=[
@@ -39,11 +39,11 @@ class Dwarf(Race):
                 AbilityScore.CONSTITUTION: 2
             },
             racialTraits=[
-                "Dwarven Speed",
-                "Darkvision",
-                "Dwarven Resilience",
-                "Dwarven Combat Training",
-                "Stonecunning"
+                RacialTrait.DWARVEN_SPEED,
+                RacialTrait.DARKVISION,
+                RacialTrait.DWARVEN_RESILIENCE,
+                RacialTrait.DWARVEN_COMBAT_TRAINING,
+                RacialTrait.STONE_CUNNING
                 
             ],
             toolProf={
@@ -70,7 +70,7 @@ class Dwarf_Hill(Dwarf):
         super().__init__()
         self.name="Hill Dwarf"
         self.abilityBonuses[AbilityScore.WISDOM]=1
-        self.racialTraits.append("Dwarven Toughness")
+        self.racialTraits.append(RacialTrait.DWARVEN_TOUGHNESS)
      
         
 @registered
@@ -80,7 +80,7 @@ class Dwarf_Mountain(Dwarf):
         super().__init__()
         self.name="Mountain Dwarf"
         self.abilityBonuses[AbilityScore.STRENGTH]=2
-        self.racialTraits.append("Dwarven Armor Training")
+        self.racialTraits.append(RacialTrait.DWARVEN_ARMOR_TRAINING)
         
         
 @registered
@@ -94,10 +94,10 @@ class Elf(Race):
                 AbilityScore.DEXTERITY: 2
             },
             racialTraits=[
-                "Darkvision",
-                "Keen Senses",
-                "Fey Ancestry",
-                "Trance"
+                RacialTrait.DARKVISION,
+                RacialTrait.KEEN_SENSES,
+                RacialTrait.FEY_ANCESTRY,
+                RacialTrait.TRANCE
             ],
             toolProf=[],
             languages=[
@@ -116,9 +116,9 @@ class Elf_Drow(Elf):
         super().__init__()
         self.name="Drow Elf"
         self.abilityBonuses[AbilityScore.CHARISMA]=1
-        self.racialTraits.remove("Darkvision")
+        self.racialTraits.remove(RacialTrait.DARKVISION)
         self.racialTraits.extend([
-            "Superior Darkvision",
+            RacialTrait.SUPERIOR_DARKVISION,
             "Sunlight Sensitivity",
             "Drow Magic",
             "Drow Weapon Training"
