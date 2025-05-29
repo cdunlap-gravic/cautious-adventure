@@ -1,5 +1,5 @@
 # STANDARD IMPORTS FOR CLASS SETS
-from core.types import AbilityScore, Skill, Sourcebooks
+from core.types import AbilityScore, Skill, Sourcebooks, Tools, Weapons, WeaponCategory
 
 from core.Class import Class, registered, sourcebook
 from core.SpellSlotTree import FullCastTree, HalfCastTree, PactCastTree
@@ -99,7 +99,7 @@ class Bard(Class):
                 ]
             },
             weaponProf=[
-                "Simple Weapons",
+                WeaponCategory.SIMPLE,
                 "Hand Crossbows",
                 "Longswords",
                 "Rapiers",
@@ -281,18 +281,18 @@ class Druid(Class):
                 ]
             },
             weaponProf=[
-                "Clubs",
-                "Daggers", 
-                "Darts",
-                "Javelins",
-                "Maces",
-                "Quarterstaves",
-                "Scimitars",
-                "Sickles",
-                "Slings",
-                "Spears"
+                Weapons.CLUBS,
+                Weapons.DAGGERS, 
+                Weapons.DARTS,
+                Weapons.JAVALINS,
+                Weapons.MACES,
+                Weapons.QUARTERSTAVES,
+                Weapons.SCIMATARS,
+                Weapons.SICKLES,
+                Weapons.SLINGS,
+                Weapons.SPEARS
             ],
-            toolProf=["Herbalism Kit"],
+            toolProf=[Tools.HERBALISM_KIT],
             armorProf=[
                 "Light Armor",
                 "Medium Armor",
@@ -638,7 +638,7 @@ class Rogue(Class):
                 "Rapiers",
                 "Shortswords"
             ],
-            toolProf=["Thieve's Tools"],
+            toolProf=[Tools.THIEVES_TOOLS],
             armorProf=["Light Armor"],
             startingEquipment=RogueSet,
             levelFeatures={

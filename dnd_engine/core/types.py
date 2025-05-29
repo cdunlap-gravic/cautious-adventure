@@ -227,6 +227,7 @@ class TraitCategory(Enum):
     def __str__(self): return self.value
     def __repr__(self): return f"{self.__class__.__name__}.{self.name}"
 
+
 class RacialTrait(Enum):
     # DWARF
     DWARVEN_TOUGHNESS = (
@@ -234,11 +235,11 @@ class RacialTrait(Enum):
         "Your hit point maximum increases by 1, and it increases by 1 every time you gain a level."
     )
     DWARVEN_ARMOR_TRAINING = (
-        "Dwarven Armor Training", TraitCategory.DEFENSE,
+        "Dwarven Armor Training", TraitCategory.PROFICIENCY,
         "You have proficiency with light and medium armor."
     )
     DWARVEN_RESILIENCE = (
-        "Dwarven Resilience", TraitCategory.DEFENSE,
+        "Dwarven Resilience", TraitCategory.PROFICIENCY,
         "You have advantage on saving throws against poison, and you have resistance against poison damage."
     )
     DWARVEN_COMBAT_TRAINING = (
@@ -264,15 +265,15 @@ class RacialTrait(Enum):
         "Your darkvision has a radius of 120 feet."
     )
     SUNLIGHT_SENSITIVITY = (
-        "Sunlight Sensitivity",
+        "Sunlight Sensitivity", TraitCategory.PROFICIENCY,
         "You have disadvantage on attack rolls and on Wisdom (Perception) checks that rely on sight when you, the target of your attack, or whatever you are trying to perceive is in direct sunlight."
     )
     DROW_MAGIC = (
-        "Drow Magic",
+        "Drow Magic", TraitCategory.MAGIC,
         "You know the 'Dancing Lights' cantrip. When you reach 3rd level, you can cast 'Faerie Fire' once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast 'Darkness' once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells."
     )
     DROW_WEAPON_TRAINING = (
-        "Drow Weapon Training",
+        "Drow Weapon Training", TraitCategory.PROFICIENCY,
         "You have proficiency with rapiers, shortswords, and hand crossbows."
     )
     KEEN_SENSES = (
@@ -280,7 +281,7 @@ class RacialTrait(Enum):
         "You have proficiency in the Perception skill."
     )
     FEY_ANCESTRY = (
-        "Fey Ancestry", TraitCategory.DEFENSE,
+        "Fey Ancestry", TraitCategory.PROFICIENCY,
         "You have advantage on saving throws against being charmed, and magic can’t put you to sleep."
     )
     TRANCE = (
@@ -288,23 +289,23 @@ class RacialTrait(Enum):
         "Your kind don't need to sleep. Instead, you meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for this meditation is 'trance.') While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep."
     )
     ELF_WEAPON_TRAINING = (
-        "Elf Weapon Training",
+        "Elf Weapon Training", TraitCategory.PROFICIENCY,
         "You have proficiency with the longsword, shortsword, shortbow, and longbow."
     )
     WIZARD_CANTRIP = (
-        "Wizard Cantrip",
+        "Wizard Cantrip", TraitCategory.MAGIC,
         "You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it."
     )
     EXTRA_LANGUAGE = (
-        "Extra Language",
+        "Extra Language", TraitCategory.CHOICE,
         "You can speak, read, and write one extra language of your choice."
     )
     FLEET_OF_FOOT = (
-        "Fleet of Foot",
+        "Fleet of Foot", TraitCategory.MOVEMENT,
         "Your base walking speed increases to 35 feet."
     )
     MASK_OF_THE_WILD = (
-        "Mask of the Wild",
+        "Mask of the Wild", TraitCategory.UTILITY,
         "You can attempt to hide even when you are only lightly obscured by foliage, heavy rain, falling snow, mist, or other natural phenomena."
     )
 
@@ -324,85 +325,85 @@ class RacialTrait(Enum):
 
     # GNOME
     GNOME_CUNNING = (
-        "Gnome Cunning",
+        "Gnome Cunning", TraitCategory.PROFICIENCY,
         "You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic."
     )
     NATURAL_ILLUSIONIST = (
-        "Natural Illusionist",
+        "Natural Illusionist", TraitCategory.MAGIC,
         "You know the 'Minor Illusion' cantrip. Intelligence is your spellcasting ability for it."
     )
     SPEAK_WITH_SMALL_BEASTS = (
-        "Speak with Small Beasts",
+        "Speak with Small Beasts", TraitCategory.UTILITY,
         "Through sounds and gestures, you can communicate simple ideas with Small or smaller beasts. Forest gnomes love animals and often keep them as pets."
     )
     ARTIFICERS_LORE = (
-        "Artificer's Lore",
+        "Artificer's Lore", TraitCategory.UTILITY,
         "Whenever you make an Intelligence (History) check related to magic items, alchemical objects, or technological devices, you can add twice your proficiency bonus, instead of any proficiency bonus you normally apply."
     )
     TINKER = (
-        "Tinker",
+        "Tinker", TraitCategory.UTILITY,
         "You have proficiency with artisan's tools (tinker's tools). Using those tools, you can spend 1 hour and 10 gp worth of materials to construct a Tiny clockwork device (AC 5, 1 hp). The device ceases to function after 24 hours (unless you spend 1 hour repairing it to keep it functioning), or when you use your action to dismantle it. You can have up to three such devices active at a time. When you create the device, choose one of the following options: ... (Full text is long, this is truncated example)"
     )
 
     # HALF-ELF
     SKILL_VERSATILITY = (
-        "Skill Versatility",
+        "Skill Versatility", TraitCategory.CHOICE,
         "You gain proficiency in two skills of your choice."
     )
 
     # HALF-ORC
     MENACING = (
-        "Menacing",
+        "Menacing", TraitCategory.PROFICIENCY,
         "You gain proficiency in the Intimidation skill."
     )
     RELENTLESS_ENDURANCE = (
-        "Relentless Endurance",
+        "Relentless Endurance", TraitCategory.DEFENSE,
         "When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can't use this feature again until you finish a long rest."
     )
     SAVAGE_ATTACKS = (
-        "Savage Attacks",
+        "Savage Attacks",TraitCategory.SPECIAL_ABILITY,
         "When you score a critical hit with a melee weapon attack, you can roll one of the weapon’s damage dice one additional time and add it to the extra damage of the critical hit."
     )
 
     # HALFLING
     LUCKY = (
-        "Lucky",
+        "Lucky", TraitCategory.SPECIAL_ABILITY,
         "When you roll a 1 on an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll."
     )
     BRAVE = (
-        "Brave",
+        "Brave", TraitCategory.DEFENSE,
         "You have advantage on saving throws against being frightened."
     )
     HALFLING_NIMBLENESS = (
-        "Halfling Nimbleness",
+        "Halfling Nimbleness",TraitCategory.UTILITY,
         "You can move through the space of any creature that is of a size larger than yours."
     )
     NATURALLY_STEALTHY = (
-        "Naturally Stealthy",
+        "Naturally Stealthy", TraitCategory.UTILITY,
         "You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you."
     )
     STOUT_RESILIENCE = (
-        "Stout Resilience",
+        "Stout Resilience",TraitCategory.DEFENSE,
         "You have advantage on saving throws against poison, and you have resistance to poison damage."
     )
 
     # HUMAN (Variant)
     SKILLS = (
-        "Skills", # CHOOSE 1 SKILL PROF
+        "Skills", TraitCategory.CHOICE, # CHOOSE 1 SKILL PROF
         "You gain proficiency in one skill of your choice."
     )
     FEAT = (
-        "Feat", # CHOOSE 1 FEAT
+        "Feat", TraitCategory.CHOICE, # CHOOSE 1 FEAT
         "You gain one feat of your choice."
     )
 
     # TIEFLING
     HELLISH_RESISTANCE = (
-        "Hellish Resistance",
+        "Hellish Resistance", TraitCategory.DEFENSE,
         "You have resistance to fire damage."
     )
     INFERNAL_LEGACY = (
-        "Infernal Legacy",
+        "Infernal Legacy", TraitCategory.MAGIC,
         "You know the 'Thaumaturgy' cantrip. When you reach 3rd level, you can cast 'Hellish Rebuke' once as a 2nd-level spell with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can also cast 'Darkness' once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells."
     )
 
@@ -426,6 +427,32 @@ class RacialTrait(Enum):
         return f"{self.__class__.__name__}.{self.name}"
 
 
+class Tools(Enum):
+    SMITH_TOOLS = ()
+    BREWERS_SUPPLIES = ()
+    MASONS_TOOLS = ()
+    FORGERY_KIT = ()
+    DISGUISE_KIT = ()
+    HERBALISM_KIT = ()
+    THIEVES_TOOLS = ()
+    MUSICAL_INSTRUMENT = ("Musical Instrument", "Choose 1 instrument")
+
+class Weapons(Enum):
+    DARTS = ()
+    DAGGERS = ()
+    SPEARS = ()
+    JAVALINS = ()
+    CLUBS = ()
+    MACES = ()
+    SCIMATARS = ()
+    SLINGS = ()
+    SICKLES = ()
+    QUARTERSTAVES = ()
+    BOWS = ()
+    CROSSBOWS = ()
+
+class WeaponCategory(Enum):
+    SIMPLE = ()
 @dataclass(frozen=True)
 class FlexConfig:
     count: int = 1

@@ -1,6 +1,6 @@
 # STANDARD IMPORTS FOR CLASS SETS
 from core.Background import Background, registered, sourcebook
-from core.types import Skill, Sourcebooks
+from core.types import Skill, Sourcebooks, Tools
 
 #@
 #@ are features feats? or are they of the same ilk as class features?
@@ -45,8 +45,8 @@ class Charlatan(Background):
                 Skill.SLEIGHT_OF_HAND
             ],
             toolProf=[
-                "Disguise Kit",
-                "Forgery Kit"
+                Tools.DISGUISE_KIT,
+                Tools.FORGERY_KIT
             ],
             languages=[],
             equipment=[
@@ -71,7 +71,8 @@ class Criminal(Background):
                 Skill.STEALTH
             ],
             toolProf=[
-                "Gaming set (five types), thieves' tools"
+                "Gaming set (five types)",
+                Tools.THIEVES_TOOLS
             ],
             languages=[],
             equipment=[
@@ -134,8 +135,8 @@ class Entertainer(Background):
                 Skill.PERFORMANCE
             ],
             toolProf=[
-                "Disguise Kit",
-                "Choose 1 Musical Instrument"
+                Tools.DISGUISE_KIT,
+                Tools.MUSICAL_INSTRUMENT
             ],
             languages=[],
             equipment=[

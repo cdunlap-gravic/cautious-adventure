@@ -1,4 +1,4 @@
-from core.types import AbilityScore, CreatureType, Size, FlexConfig, Sourcebooks, RacialTrait
+from core.types import AbilityScore, CreatureType, Size, FlexConfig, Sourcebooks, RacialTrait, Tools
 from core.Race import Race, registered, sourcebook
 
 from PHB14_Types import PHB14_Languages
@@ -48,9 +48,9 @@ class Dwarf(Race):
             ],
             toolProf={
                 (1, [
-                    "Smith's Tools",
-                    "Brewer's Supplies",
-                    "Mason's Tools"  
+                    Tools.SMITH_TOOLS,
+                    Tools.BREWERS_SUPPLIES,
+                    Tools.MASONS_TOOLS
                     ]
                 )
             },
@@ -119,9 +119,9 @@ class Elf_Drow(Elf):
         self.racialTraits.remove(RacialTrait.DARKVISION)
         self.racialTraits.extend([
             RacialTrait.SUPERIOR_DARKVISION,
-            "Sunlight Sensitivity",
-            "Drow Magic",
-            "Drow Weapon Training"
+            RacialTrait.SUNLIGHT_SENSITIVITY,
+            RacialTrait.DROW_MAGIC,
+            RacialTrait.DROW_WEAPON_TRAINING
         ])
 
 
@@ -133,9 +133,9 @@ class Elf_High(Elf):
         self.name="High Elf"
         self.abilityBonuses[AbilityScore.INTELLIGENCE]=1
         self.racialTraits.extend([
-            "Elf Weapon Training",
-            "Wizard Cantrip",
-            "Extra Language"
+            RacialTrait.ELF_WEAPON_TRAINING,
+            RacialTrait.WIZARD_CANTRIP,
+            RacialTrait.EXTRA_LANGUAGE
         ])
         
         
@@ -147,9 +147,9 @@ class Elf_Wood(Elf):
         self.name="Wood Elf"
         self.abilityBonuses[AbilityScore.WISDOM]=1
         self.racialTraits.extend([
-            "Elf Weapon Training",
-            "Fleet of Foot",
-            "Mask of the Wild"
+            RacialTrait.ELF_WEAPON_TRAINING,
+            RacialTrait.FLEET_OF_FOOT,
+            RacialTrait.MASK_OF_THE_WILD
         ])
         self.speed=35
         
@@ -165,8 +165,8 @@ class Gnome(Race):
                 AbilityScore.INTELLIGENCE: 2
             },
             racialTraits=[
-                "Darkvision",
-                "Gnome Cunning"
+                RacialTrait.DARKVISION,
+                RacialTrait.GNOME_CUNNING
             ],
             toolProf={},
             languages=[
@@ -186,8 +186,8 @@ class Gnome_Forest(Gnome):
         self.name="Forest Gnome"
         self.abilityBonuses[AbilityScore.DEXTERITY]=1
         self.racialTraits.extend([
-            "Natural Illusionists",
-            "Speak with Small Beasts"
+            RacialTrait.NATURAL_ILLUSIONIST,
+            RacialTrait.SPEAK_WITH_SMALL_BEASTS
         ])
 
 
@@ -200,8 +200,8 @@ class Gnome_Rock(Gnome):
         self.abilityBonuses[AbilityScore.CONSTITUTION]=1
         self.toolProf.append("Tinker's Tools")
         self.racialTraits.extend([
-            "Artificer's Lore",
-            "Tinker"
+            RacialTrait.ARTIFICERS_LORE,
+            RacialTrait.TINKER
         ])
         
 
@@ -221,10 +221,10 @@ class Half_Elf(Race):
                 )
             },
             racialTraits=[
-                "Darkvision",
-                "Fey Ancestry",
-                "Skill Versatility",
-                "Extra Language"
+                RacialTrait.DARKVISION,
+                RacialTrait.FEY_ANCESTRY,
+                RacialTrait.SKILL_VERSATILITY,
+                RacialTrait.EXTRA_LANGUAGE
             ],
             toolProf=[],
             languages=[
@@ -248,10 +248,10 @@ class Half_Orc(Race):
                 AbilityScore.CONSTITUTION: 1
             },
             racialTraits=[
-                "Darkvision",
-                "Menacing",
-                "Relentless Endurance",
-                "Savage Attacks"
+                RacialTrait.DARKVISION,
+                RacialTrait.MENACING,
+                RacialTrait.RELENTLESS_ENDURANCE,
+                RacialTrait.SAVAGE_ATTACKS
             ],
             toolProf=[],
             languages=[
@@ -274,9 +274,9 @@ class Halfling(Race):
                 AbilityScore.DEXTERITY: 2
             },
             racialTraits=[
-                "Lucky",
-                "Brave",
-                "Halfling Nimbleness"
+                RacialTrait.LUCKY,
+                RacialTrait.BRAVE,
+                RacialTrait.HALFLING_NIMBLENESS
             ],
             toolProf=[],
             languages=[
@@ -295,7 +295,7 @@ class Halfling_Lightfoot(Halfling):
         super().__init__()
         self.name = "Lightfoot Halfling"
         self.abilityBonuses[AbilityScore.CHARISMA]= 1
-        self.racialTraits.append("Naturally Stealthy")
+        self.racialTraits.append(RacialTrait.NATURALLY_STEALTHY)
 
 
 @registered
@@ -305,7 +305,7 @@ class Halfling_Stout(Halfling):
         super().__init__()
         self.name = "Stout Halfling"
         self.abilityBonuses[AbilityScore.CONSTITUTION]= 1
-        self.racialTraits.append("Stout Resilience")
+        self.racialTraits.append(RacialTrait.STOUT_RESILIENCE)
 
 
 
@@ -325,7 +325,7 @@ class Human(Race):
                 AbilityScore.CHARISMA: 1
             },
             racialTraits=[
-                "Extra Language"
+                RacialTrait.EXTRA_LANGUAGE
             ],
             toolProf=[],
             languages=[
@@ -346,9 +346,9 @@ class Human_Variant(Race):
                 AbilityScore.FLEX: FlexConfig(count=2,value=1)
             },
             racialTraits=[
-                "Extra Language",
-                "Skills", # CHOOSE 1 SKILL PROF
-                "Feat" # CHOSE 1 FEAT
+                RacialTrait.EXTRA_LANGUAGE,
+                RacialTrait.SKILLS, # CHOOSE 1 SKILL PROF
+                RacialTrait.FEAT # CHOSE 1 FEAT
             ],
             toolProf=[],
             languages=[
@@ -371,9 +371,9 @@ class Tiefling(Race):
                 AbilityScore.INTELLIGENCE: 1
             },
             racialTraits=[
-                "Darkvision",
-                "Hellish Resistance",
-                "Infernal Legacy"
+                RacialTrait.DARKVISION,
+                RacialTrait.HELLISH_RESISTANCE,
+                RacialTrait.INFERNAL_LEGACY
             ],
             toolProf=[],
             languages=[
