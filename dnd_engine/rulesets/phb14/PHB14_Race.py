@@ -198,7 +198,7 @@ class Gnome_Rock(Gnome):
         super().__init__()
         self.name="Rock Gnome"
         self.abilityBonuses[AbilityScore.CONSTITUTION]=1
-        self.toolProf.append("Tinker's Tools")
+        self.toolProf.append(Tools.TINKERS_TOOLS)
         self.racialTraits.extend([
             RacialTrait.ARTIFICERS_LORE,
             RacialTrait.TINKER

@@ -140,7 +140,7 @@ class Entertainer(Background):
             ],
             languages=[],
             equipment=[
-                "Choose 1 Musical Instrument",
+                Tools.MUSICAL_INSTRUMENT,
                 "favor of an admirer",
                 "costume clothes",
                 "belt pouch",
@@ -158,7 +158,7 @@ class Entertainer_Gladiator(Entertainer):
     def __init__(self):
         super().__init__()
         self.name="Entertainer (Gladiator)",
-        self.equipment.remove("Choose 1 Musical Instrument")
+        self.equipment.remove(Tools.MUSICAL_INSTRUMENT)
         self.equipment.append("Choose 1 Unusual Weapon")
         
         
@@ -174,12 +174,12 @@ class FolkHero(Background):
                 Skill.SURVIVAL
             ],
             toolProf=[
-                "1 type Artisan's Tools",
+                Tools.ARTISANS_TOOLS,
                 "vehicles (land)"
             ],
             languages=[],
             equipment=[
-                "1 set Artisan's Tools",
+                Tools.ARTISANS_TOOLS,
                 "Shovel",
                 "Iron Pot",
                 "Common Clothes",
@@ -201,7 +201,7 @@ class GuildArtisan(Background):
                 Skill.INSIGHT,
                 Skill.PERSUASION
             ],
-            toolProf=["Choose 1 Artisan's Tools"],
+            toolProf=[Tools.ARTISANS_TOOLS],
             languages=["choose 1"],
             equipment=[
                 "Choose 1 Artisan's Tools",
@@ -239,7 +239,7 @@ class Hermit(Background):
                 Skill.MEDICINE,
                 Skill.RELIGION
             ],
-            toolProf=["Herbalism Kit"],
+            toolProf=[Tools.HERBALISM_KIT],
             languages=["Choose 1 Language"],
             equipment=[
                 "Scroll Case",
@@ -309,7 +309,7 @@ class Outlander(Background):
                 Skill.ATHLETICS,
                 Skill.SURVIVAL
             ],
-            toolProf=["Choose 1 Musical Instrument"],
+            toolProf=[Tools.MUSICAL_INSTRUMENT],
             languages=["Choose 1 Language"],
             equipment=[
                 "Staff",
@@ -361,7 +361,7 @@ class Sailor(Background):
                 Skill.PERCEPTION
             ],
             toolProf=[
-                "Navigator's Tools",
+                Tools.NAVIGATORS_TOOLS,
                 "Vehicles (Water)"
             ],
             languages=[],
@@ -428,8 +428,8 @@ class Urchin(Background):
                 Skill.STEALTH
             ],
             toolProf=[
-                "Disguise Kit",
-                "Thieve's Tools"
+                Tools.DISGUISE_KIT,
+                Tools.THIEVES_TOOLS
             ],
             languages=[],
             equipment=[

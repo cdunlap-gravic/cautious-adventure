@@ -1,5 +1,5 @@
 # STANDARD IMPORTS FOR CLASS SETS
-from core.types import AbilityScore, Skill, Sourcebooks, Tools, Weapons, WeaponCategory
+from core.types import AbilityScore, Skill, Sourcebooks, Tools, Weapons, WeaponCategory, Armor, ArmorCategory, classFeature
 
 from core.Class import Class, registered, sourcebook
 from core.SpellSlotTree import FullCastTree, HalfCastTree, PactCastTree
@@ -32,37 +32,37 @@ class Barbarian(Class):
                 ]
             },
             weaponProf=[
-                "Simple Weapons",
-                "Martial Weapons"
+                WeaponCategory.SIMPLE,
+                WeaponCategory.MARTIAL
             ],
             toolProf=[],
             armorProf=[
-                "Light Armor",
-                "Medium Armor",
-                "Shields"
+                ArmorCategory.LIGHT,
+                ArmorCategory.MEDIUM,
+                ArmorCategory.SHIELDS
             ],
             startingEquipment=BarbarianSet,
             levelFeatures={
-                1: ["Rage", "Unarmored Defense"],
-                2: ["Danger Sense", "Reckless Attack"],
-                3: ["Primal Path"],
-                4: ["ASI or Feat"],
-                5: ["Extra Attack", "Fast Movement"],
-                6: ["Path Feature"],
+                1: [classFeature.RAGE, classFeature.UNARMORED_DEFENSE],
+                2: [classFeature.DANGER_SENSE, classFeature.RECKLESS_ATTACK],
+                3: [classFeature.SUBCLASS_CHOICE],
+                4: [classFeature.ASI],
+                5: [classFeature.EXTRA_ATTACK, classFeature.FAST_MOVEMENT],
+                6: [classFeature.SUBCLASS_FEATURE],
                 7: ["Feral Instinct"],
-                8: ["ASI or Feat"],
+                8: [classFeature.ASI],
                 9: ["Brutal Critical"],
-                10: ["Path Feature"],
+                10: [classFeature.SUBCLASS_FEATURE],
                 11: ["Relentless Rage"],
-                12: ["ASI or Feat"],
+                12: [classFeature.ASI],
                 13: ["Brutal Critical"],
-                14: ["Path Feature"],
+                14: [classFeature.SUBCLASS_FEATURE],
                 15: ["Persistent Rage"],
-                16: ["ASI or Feat"],
+                16: [classFeature.ASI],
                 17: ["Brutal Critical"],
                 18: ["Indomitable Might"],
-                19: ["ASI or Feat"],
-                20: ["Primal Champion"]
+                19: [classFeature.ASI],
+                20: [classFeature.CLASS_CAPSTONE]
             }
         )
 @registered
@@ -100,36 +100,36 @@ class Bard(Class):
             },
             weaponProf=[
                 WeaponCategory.SIMPLE,
-                "Hand Crossbows",
-                "Longswords",
-                "Rapiers",
-                "Shortswords"
+                Weapons.CROSSBOWS_HAND,
+                Weapons.LONGSWORDS,
+                Weapons.RAPIERS,
+                Weapons.SHORTSWORDS
             ],
-            toolProf=["3 Musical Instruments"], # We'll just figure this one out later...
+            toolProf=[Tools.MUSICAL_INSTRUMENT, Tools.MUSICAL_INSTRUMENT, Tools.MUSICAL_INSTRUMENT], # We'll just figure this one out later...
             armorProf=[
-                "Light Armor"
+                ArmorCategory.LIGHT
             ],
             startingEquipment=None,
             levelFeatures={
-                1: ["Bardic Inspiration", "Spellcasting"],
+                1: ["Bardic Inspiration", classFeature.SPELLCASTING],
                 2: ["Jack of All Trades", "Song of Rest"],
-                3: ["Bard College", "Expertise"],
-                4: ["ASI or Feat"],
+                3: [classFeature.SUBCLASS_CHOICE, "Expertise"],
+                4: [classFeature.ASI],
                 5: ["Bardic Inspiration", "Font of Inspiration"],
-                6: ["Countercharm", "Bard College feature"],
+                6: ["Countercharm", classFeature.SUBCLASS_FEATURE],
                 7: [],
-                8: ["ASI or Feat"],
+                8: [classFeature.ASI],
                 9: ["Song of Rest"],
                 10: ["Bardic Inspiration", "Expertise", "Magical Secrets"],
                 11: [],
-                12: ["ASI or Feat"],
+                12: [classFeature.ASI],
                 13: ["Song of Rest"],
-                14: ["Magical Secrets", "Bard College feature"],
+                14: ["Magical Secrets", classFeature.SUBCLASS_FEATURE],
                 15: ["Bardic Inspiration"],
-                16: ["ASI or Feat"],
+                16: [classFeature.ASI],
                 17: ["Song of Rest"],
                 18: ["Magical Secrets"],
-                19: ["ASI or Feat"],
+                19: [classFeature.ASI],
                 20: ["Superior Inspiration"]
             },
             spellSlotTree=FullCastTree,
@@ -201,35 +201,35 @@ class Cleric(Class):
                 ]
             },
             weaponProf=[
-                "Simple Weapons"
+                WeaponCategory.SIMPLE
             ],
             toolProf=[],
             armorProf=[
-                "Light Armor",
-                "Medium Armor",
-                "Shields"
+                ArmorCategory.LIGHT, 
+                ArmorCategory.MEDIUM, 
+                ArmorCategory.SHIELDS
             ],
             startingEquipment=ClericSet,
             levelFeatures={
-                1: ["Spellcasting", "Divine Domain"],
-                2: ["Channel Divinity", "Divine Domaine Feature"],
+                1: [classFeature.SPELLCASTING, classFeature.SUBCLASS_CHOICE],
+                2: ["Channel Divinity", classFeature.SUBCLASS_FEATURE],
                 3: [],
-                4: ["ASI or Feat"],
+                4: [classFeature.ASI],
                 5: ["Destroy Undead"],
-                6: ["Channel Divinity", "Divine Domain Feature"],
+                6: ["Channel Divinity", classFeature.SUBCLASS_FEATURE],
                 7: [],
-                8: ["ASI or Feat", "Destroy Undead", "Divine Domain Feature"],
+                8: [classFeature.ASI, "Destroy Undead", classFeature.SUBCLASS_FEATURE],
                 9: [],
                 10: ["Divine Intervention"],
                 11: ["Destroy Undead"],
-                12: ["ASI or Feat"],
+                12: [classFeature.ASI],
                 13: [],
                 14: ["Destroy Undead"],
                 15: [],
-                16: ["ASI or Feat"],
-                17: ["Destroy Undead", "Divine Domain Feature"],
+                16: [classFeature.ASI],
+                17: ["Destroy Undead", classFeature.SUBCLASS_FEATURE],
                 18: ["Channel Divinity"],
-                19: ["ASI or Feat"],
+                19: [classFeature.ASI],
                 20: ["Divine Intervention"]
             },
             spellSlotTree=FullCastTree,
@@ -294,32 +294,32 @@ class Druid(Class):
             ],
             toolProf=[Tools.HERBALISM_KIT],
             armorProf=[
-                "Light Armor",
-                "Medium Armor",
-                "Shields",
+                ArmorCategory.LIGHT, 
+                ArmorCategory.MEDIUM, 
+                ArmorCategory.SHIELDS,
                 "Exclude Metal" # Yeah no fuck that rule. This is stupid.
             ],
             startingEquipment=DruidSet,
             levelFeatures={
-                1: ["Druidic", "Spellcasting"],
+                1: ["Druidic", classFeature.SPELLCASTING],
                 2: ["Wild Shape", "Druid Circle"],
                 3: [],
-                4: ["Wild Shape Improvement", "ASI or Feat"],
+                4: ["Wild Shape Improvement", classFeature.ASI],
                 5: [],
-                6: ["Druid Circle Feature"],
+                6: [classFeature.SUBCLASS_FEATURE],
                 7: [],
-                8: ["Wild Shape Improvement", "ASI or Feat"],
+                8: ["Wild Shape Improvement", classFeature.ASI],
                 9: [],
-                10: ["Druid Circle Feature"],
+                10: [classFeature.SUBCLASS_FEATURE],
                 11: [],
-                12: ["ASI or Feat"],
+                12: [classFeature.ASI],
                 13: [],
-                14: ["Druid Circle Feature"],
+                14: [classFeature.SUBCLASS_FEATURE],
                 15: [],
-                16: ["ASI or Feat"],
+                16: [classFeature.ASI],
                 17: [],
                 18: ["Timeless Body", "Beast Spells"],
-                19: ["ASI or Feat"],
+                19: [classFeature.ASI],
                 20: ["Archdruid"]
             },
             spellSlotTree=FullCastTree,
@@ -371,37 +371,37 @@ class Fighter(Class):
                 ]
             },
             weaponProf=[
-                "Simple Weapons",
-                "Martial Weapons"
+                WeaponCategory.SIMPLE,
+                WeaponCategory.MARTIAL
             ],
             toolProf=[],
             armorProf=[
-                "Light Armor", # this line should look more like Equipment.Armours.tag["light"] These tags will only be a placeholder for now.
-                "Medium Armor",
-                "Heavy Armor",
-                "Shields"
+                ArmorCategory.LIGHT, 
+                ArmorCategory.MEDIUM,
+                ArmorCategory.HEAVY,
+                ArmorCategory.SHIELDS
             ],
             startingEquipment=FighterSet,
             levelFeatures={
                 1: ["Fighting Style", "Second Wind"],
                 2: ["Action Surge"],
                 3: ["Martial Archetype"],
-                4: ["ASI or Feat", "Martial Versatility (Optional)"],
+                4: [classFeature.ASI, "Martial Versatility (Optional)"],
                 5: ["Extra Attack"],
-                6: ["ASI or Feat", "Martial Versatility (Optional)"],
-                7: ["Martial Archetype Feature"],
-                8: ["ASI or Feat", "Martial Versatility (Optional)"],
+                6: [classFeature.ASI, "Martial Versatility (Optional)"],
+                7: [classFeature.SUBCLASS_FEATURE],
+                8: [classFeature.ASI, "Martial Versatility (Optional)"],
                 9: ["Indomitable"],
-                10: ["Martial Archetype Feature"],
+                10: [classFeature.SUBCLASS_FEATURE],
                 11: ["Extra Attack"],
-                12: ["ASI or Feat", "Martial Versatility (Optional)"],
+                12: [classFeature.ASI, "Martial Versatility (Optional)"],
                 13: ["Indomitable"],
-                14: ["ASI or Feat", "Martial Versatility (Optional)"],
-                15: ["Martial Archetype Feature"],
-                16: ["ASI or Feat", "Martial Versatility (Optional)"],
+                14: [classFeature.ASI, "Martial Versatility (Optional)"],
+                15: [classFeature.SUBCLASS_FEATURE],
+                16: [classFeature.ASI, "Martial Versatility (Optional)"],
                 17: ["Action Surge", "Indomitable"],
-                18: ["Martial Archetype Feature"],
-                19: ["ASI or Feat", "Martial Versatility (Optional)"],
+                18: [classFeature.SUBCLASS_FEATURE],
+                19: [classFeature.ASI, "Martial Versatility (Optional)"],
                 20: ["Extra Attack"]
             }
         )
@@ -429,13 +429,13 @@ class Monk(Class):
                 ]
             },
             weaponProf=[
-                "Simple Weapons",
-                "Shortswords"
+                WeaponCategory.SIMPLE,
+                Weapons.SHORTSWORDS
             ],
             toolProf={
                 1: [
-                    "Artisan's Tools",
-                    "Musical Instrument"
+                    Tools.ARTISANS_TOOLS,
+                    Tools.MUSICAL_INSTRUMENT
                 ]
             },
             armorProf=[],
@@ -444,22 +444,22 @@ class Monk(Class):
                 1: ["Unarmored Defence", "Martial Arts"],
                 2: ["Ki", "Unarmored Movement"],
                 3: ["Deflect Missiles", "Monastic Tradition"],
-                4: ["ASI or Feat", "Slow Fall"],
+                4: [classFeature.ASI, "Slow Fall"],
                 5: ["Extra Attack", "Stunning Strike"], #? Is this the same Extra Attack as Barbarian?
-                6: ["Ki-Empowered Strikes", "Monastic Tradition Feature"],
+                6: ["Ki-Empowered Strikes", classFeature.SUBCLASS_FEATURE],
                 7: ["Evasion", "Stillness of Mind"],
-                8: ["ASI or Feat"],
+                8: [classFeature.ASI],
                 9: ["Unarmored Movement Improvement"],
                 10: ["Purity of Body"],
-                11: ["Monastic Tradition Feature"],
-                12: ["ASI or Feat"],
+                11: [classFeature.SUBCLASS_FEATURE],
+                12: [classFeature.ASI],
                 13: ["Tongue of the Sun and Moon"],
                 14: ["Diamond Soul"],
                 15: ["Timeless Body"],
-                16: ["ASI or Feat"],
-                17: ["Monastic Tradition Feature"],
+                16: [classFeature.ASI],
+                17: [classFeature.SUBCLASS_FEATURE],
                 18: ["Empty Body"],
-                19: ["ASI or Feat"],
+                19: [classFeature.ASI],
                 20: ["Perfect Self"]
             }
             #? And what about Martial Arts die? and Ki Points? etc. Map later.
@@ -487,38 +487,38 @@ class Paladin(Class):
                 ]
             },
             weaponProf=[
-                "Simple Weapons",
-                "Martial Weapons"
+                WeaponCategory.SIMPLE,
+                WeaponCategory.MARTIAL
             ],
             toolProf=[],
             armorProf=[
-                "Light Armor",
-                "Medium Armor",
-                "Heavy Armor",
-                "Shields"
+                ArmorCategory.LIGHT,
+                ArmorCategory.MEDIUM,
+                ArmorCategory.HEAVY,
+                ArmorCategory.SHIELDS
             ],
             startingEquipment=PaladinSet,
             levelFeatures={
                 1: ["Divine Sense", "Lay on Hands"],
-                2: ["Divine Smite", "Fighting Style", "Spellcasting"],
+                2: ["Divine Smite", "Fighting Style", classFeature.SPELLCASTING],
                 3: ["Divine Health", "Sacred Oath"],
-                4: ["ASI or Feat"],
+                4: [classFeature.ASI],
                 5: ["Extra Attack"],
                 6: ["Aura of Protection"],
-                7: ["Sacred Oath Feature"],
-                8: ["ASI or Feat"],
+                7: [classFeature.SUBCLASS_FEATURE],
+                8: [classFeature.ASI],
                 9: [],
                 10: ["Aura of Courage"],
                 11: ["Improved Divine Smite"],
-                12: ["ASI or Feat"],
+                12: [classFeature.ASI],
                 13: [],
                 14: ["Cleansing Touch"],
-                15: ["Sacred Oath Feature"],
-                16: ["ASI or Feat"],
+                15: [classFeature.SUBCLASS_FEATURE],
+                16: [classFeature.ASI],
                 17: [],
                 18: ["Aura Improvements"],
-                19: ["ASI or Feat"],
-                20: ["Sacred Oath Feature"]
+                19: [classFeature.ASI],
+                20: [classFeature.SUBCLASS_FEATURE]
             },
             spellSlotTree=HalfCastTree
         )
@@ -547,36 +547,36 @@ class Ranger(Class):
                 ]
             },
             weaponProf=[
-                "Simple Weapons",
-                "Martial Weapons"
+                WeaponCategory.SIMPLE,
+                WeaponCategory.MARTIAL
             ],
             toolProf=[],
             armorProf=[
-                "Light Armor",
-                "Medium Armor",
-                "Shields"
+                ArmorCategory.LIGHT,
+                ArmorCategory.MEDIUM,
+                ArmorCategory.SHIELDS
             ],
             startingEquipment=RangerSet,
             levelFeatures={
                 1: ["Favored Enemy", "Natural Explorer"],
-                2: ["Fighting Style", "Spellcasting"],
+                2: ["Fighting Style", classFeature.SPELLCASTING],
                 3: ["Ranger Archetype", "Primeval Awareness"],
-                4: ["ASI or Feat"],
+                4: [classFeature.ASI],
                 5: ["Extra Attack"],
                 6: ["Favored Enemy Improvements", "Natural Explorer Improvements"],
-                7: ["Ranger Archetype Feature"],
-                8: ["ASI or Feat", "Land's Stride"],
+                7: [classFeature.SUBCLASS_FEATURE],
+                8: [classFeature.ASI, "Land's Stride"],
                 9: [],
                 10: ["Hide in Plain Sight", "Natural Explorer Improvement"],
-                11: ["Ranger Archetype Feature"],
-                12: ["ASI or Feat"],
+                11: [classFeature.SUBCLASS_FEATURE],
+                12: [classFeature.ASI],
                 13: [],
                 14: ["Vanish", "Favored Enemy Improvement"],
-                15: ["Ranger Archetype Feature"],
-                16: ["ASI or Feat"],
+                15: [classFeature.SUBCLASS_FEATURE],
+                16: [classFeature.ASI],
                 17: [],
                 18: ["Feral Senses"],
-                19: ["ASI or Feat"],
+                19: [classFeature.ASI],
                 20: ["Foe Slayer"]
             },
             spellSlotTree=HalfCastTree,
@@ -632,35 +632,35 @@ class Rogue(Class):
                 ]
             },
             weaponProf=[
-                "Simple Weapons",
-                "Hand Crossbows",
-                "Longswords",
-                "Rapiers",
-                "Shortswords"
+                WeaponCategory.SIMPLE,
+                Weapons.CROSSBOWS_HAND,
+                Weapons.LONGSWORDS,
+                Weapons.RAPIERS,
+                Weapons.SHORTSWORDS
             ],
             toolProf=[Tools.THIEVES_TOOLS],
-            armorProf=["Light Armor"],
+            armorProf=[ArmorCategory.LIGHT],
             startingEquipment=RogueSet,
             levelFeatures={
                 1: ["Expertise", "Sneak Attack", "Thieves' Cant"],
                 2: ["Cunning Action"],
                 3: ["Roguish Archetype"],
-                4: ["ASI or Feat"],
+                4: [classFeature.ASI],
                 5: ["Uncanny Dodge"],
                 6: ["Expertise"],
                 7: ["Evasion"],
-                8: ["ASI or Feat"],
-                9: ["Roguish Archetype Feature"],
-                10: ["ASI or Feat"],
+                8: [classFeature.ASI],
+                9: [classFeature.SUBCLASS_FEATURE],
+                10: [classFeature.ASI],
                 11: ["Reliable Talent"],
-                12: ["ASI or Feat"],
-                13: ["Roguish Archetype Feature"],
+                12: [classFeature.ASI],
+                13: [classFeature.SUBCLASS_FEATURE],
                 14: ["Blindsense"],
                 15: ["Slippery Mind"],
-                16: ["ASI or Feat"],
-                17: ["Roguish Archetype Feature"],
+                16: [classFeature.ASI],
+                17: [classFeature.SUBCLASS_FEATURE],
                 18: ["Elusive"],
-                19: ["ASI or Feat"],
+                19: [classFeature.ASI],
                 20: ["Stroke of Luck"]
             }
         )
@@ -687,35 +687,35 @@ class Sorcerer(Class):
                 ]
             },
             weaponProf=[
-                "Daggers",
-                "Darts",
-                "Slings",
-                "Quarterstaves",
-                "Light Crossbowws"
+                Weapons.DAGGERS,
+                Weapons.DARTS,
+                Weapons.SLINGS,
+                Weapons.QUARTERSTAVES,
+                Weapons.CROSSBOWS_LIGHT
             ],
             toolProf=[],
             armorProf=[],
             startingEquipment=SorcererSet,
             levelFeatures={
-                1: ["Spellcasting", "Sorcerous Origin"],
+                1: [classFeature.SPELLCASTING, classFeature.SUBCLASS_CHOICE],
                 2: ["Font of Magic"],
                 3: ["Metamagic"],
-                4: ["ASI or Feat"],
+                4: [classFeature.ASI],
                 5: [],
-                6: ["Sorcerous Origin Feature"],
+                6: [classFeature.SUBCLASS_FEATURE],
                 7: [],
-                8: ["ASI or Feat"],
+                8: [classFeature.ASI],
                 9: [],
                 10: ["Metamagic"],
                 11: [],
-                12: ["ASI or Feat"],
+                12: [classFeature.ASI],
                 13: [],
-                14: ["Sorcerous Origin Feature"],
+                14: [classFeature.SUBCLASS_FEATURE],
                 15: [],
-                16: ["ASI or Feat"],
+                16: [classFeature.ASI],
                 17: ["Metamagic"],
-                18: ["Sorcerous Origin Feature"],
-                19: ["ASI or Feat"],
+                18: [classFeature.SUBCLASS_FEATURE],
+                19: [classFeature.ASI],
                 20: ["Sorcerous Restoration"]
             },
             spellSlotTree=FullCastTree,
@@ -788,30 +788,30 @@ class Warlock(Class):
                     Skill.RELIGION
                 ]
             },
-            weaponProf=["Simple Weapons"],
+            weaponProf=[WeaponCategory.SIMPLE],
             toolProf=[],
-            armorProf=["Light Armor"],
+            armorProf=[ArmorCategory.LIGHT],
             startingEquipment=WarlockSet,
             levelFeatures={
                 1: ["Pact Magic", "Otherworldly Patron"],
                 2: ["Eldritch Invocations"],
                 3: ["Pact Boon"],
-                4: ["ASI or Feat"],
+                4: [classFeature.ASI],
                 5: [],
                 6: ["Otherworldly Patron Feature"],
                 7: [],
-                8: ["ASI or Feat"],
+                8: [classFeature.ASI],
                 9: [],
                 10: ["Otherworldly Patron Feature"],
                 11: ["Mystic Arcanum"],
-                12: ["ASI or Feat"],
+                12: [classFeature.ASI],
                 13: ["Mystic Arcanum"],
                 14: ["Otherworldly Patron Feature"],
                 15: ["Mystic Arcanum"],
-                16: ["ASI or Feat"],
+                16: [classFeature.ASI],
                 17: ["Mystic Arcanum"],
                 18: [],
-                19: ["ASI or Feat"],
+                19: [classFeature.ASI],
                 20: ["Eldritch Master"]
             },
             spellSlotTree=PactCastTree,
@@ -884,27 +884,27 @@ class Wizard(Class):
             },
             toolProf=[],
             weaponProf=[
-                "Daggers",
-                "Darts",
-                "Slings",
-                "Quarterstaves",
-                "Light Crossbows"
+                Weapons.DAGGERS,
+                Weapons.DARTS,
+                Weapons.SLINGS,
+                Weapons.QUARTERSTAVES,
+                Weapons.CROSSBOWS_LIGHT
             ],
             armorProf=[],
             startingEquipment=WizardSet,
             levelFeatures={
-                1: ["Spellcasting", "Arcane Recovery"],
+                1: [classFeature.SPELLCASTING, "Arcane Recovery"],
                 2: ["Arcane Tradition"],
                 3: ["Cantrip Formulas (Optional)"],
-                4: ["ASI or Feat"],
+                4: [classFeature.ASI],
                 6: ["Arcane Tradition feature"],
-                8: ["ASI or Feat"],
+                8: [classFeature.ASI],
                 10: ["Arcane Tradition feature"],
-                12: ["ASI or Feat"],
+                12: [classFeature.ASI],
                 14: ["Arcane Tradition feature"],
-                16: ["ASI or Feat"],
+                16: [classFeature.ASI],
                 18: ["Spell Mastery"],
-                19: ["ASI or Feat"],
+                19: [classFeature.ASI],
                 20: ["Signature Spells"]
             },
             spellSlotTree=FullCastTree,

@@ -436,6 +436,9 @@ class Tools(Enum):
     HERBALISM_KIT = ()
     THIEVES_TOOLS = ()
     MUSICAL_INSTRUMENT = ("Musical Instrument", "Choose 1 instrument")
+    ARTISANS_TOOLS = ()
+    TINKERS_TOOLS = ()
+    NAVIGATORS_TOOLS = ()
 
 class Weapons(Enum):
     DARTS = ()
@@ -450,9 +453,69 @@ class Weapons(Enum):
     QUARTERSTAVES = ()
     BOWS = ()
     CROSSBOWS = ()
+    CROSSBOWS_HAND = ()
+    CROSSBOWS_LIGHT = ()
+    LONGSWORDS = ()
+    SHORTSWORDS = ()
+    RAPIERS = ()
 
 class WeaponCategory(Enum):
     SIMPLE = ()
+    MARTIAL = ()
+    
+class Armor(Enum):
+    ...
+    
+class ArmorCategory(Enum):
+    LIGHT = ()
+    MEDIUM = ()
+    HEAVY = ()
+    SHIELDS = ()
+    
+class classFeature(Enum):
+    SUBCLASS_CHOICE = ()
+    SUBCLASS_FEATURE = ()
+    CLASS_CAPSTONE = ()
+    
+    ASI = ("Ability Score Increase", "Increase an ability score by one point.... or take a Feat.")
+    RAGE = ()
+    UNARMORED_DEFENSE = ()
+    SPELLCASTING = ()
+    DANGER_SENSE = ()
+    RECKLESS_ATTACK = ()
+    EXTRA_ATTACK = ()
+    FAST_MOVEMENT = ()
+    FERAL_INSTINCT = ()
+    BRUTAL_CRITICAL = ()
+    RELENTLESS_RAGE = ()
+    PERSISTANT_RAGE = ()
+    INDOMITABLE_MIGHT = ()
+    BARDIC_INSPIRATION = ()
+    JACK_OF_ALL_TRADES = ()
+    SONG_OF_REST = ()
+    BARD_COLLEGE = ()
+    EXPERTISE = ()
+    FONT_OF_INSPIRATION = ()
+    COUNTERCHARM = ()
+    MAGICAL_SECRETS = ()
+    SUPERIOR_INSPIRATION = ()
+    # = ()
+    # = ()
+    # = ()
+    # = ()
+    # = ()
+    # = ()
+    # = ()
+    # = ()
+    # = ()
+    # = ()
+    # = ()
+    # = ()
+    # = ()
+    # = ()
+    # = ()
+    # = ()
+    # = ()
 @dataclass(frozen=True)
 class FlexConfig:
     count: int = 1
